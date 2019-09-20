@@ -12,11 +12,13 @@
  * Time Complexity: O(mn)
  * 
  * Leetcode Result:
- * TODO The below code contains bugs
+ * Runtime: 17 ms, faster than 52.24% of Java online submissions for 01 Matrix.
+ * Memory Usage: 54.3 MB, less than 95.83% of Java online submissions for 01 Matrix.
  */
 class Solution {
     public int[][] updateMatrix(int[][] matrix) {
         int m = matrix.length;
+        if(m==0) return matrix;
         int n = matrix[0].length;
         int[][] result = new int[m][n];
         
@@ -33,19 +35,19 @@ class Solution {
         }
         
         
-        int[] x = new int[]{-1, 0, 1, 0};
-        int[] y = new int[]{0, 1, 0, -1};
+        int[] dx = new int[]{-1, 0, 1, 0};
+        int[] dy = new int[]{0, 1, 0, -1};
         while(!q.isEmpty()) {
             Pair current = q.remove();
-            System.out.println("x: " + current.x + " y: " + current.y);
-            for(int dx : x) {
-                for(int dy : y) {
-                    if(current.x + dx >= 0 && current.x + dx < m && current.y + dy >= 0 && current.y + dy < n) {
-                        if(result[current.x][current.y] + 1 < result[current.x + dx][current.y + dy]) {
-    result[current.x + dx][current.y + dy] = result[current.x][current.y] + 1;
-                             q.add(new Pair(current.x + dx, current.y + dy));
-                            
-                        }
+            for(int i = 0; i< 4; i++) {
+                int x = current.x + dx[i];
+                int y = current.y + dy[i];
+                
+                if(x >= 0 && x < m && y >= 0 && y < n) {
+                    if(result[current.x][current.y] + 1 < result[x][y]) {
+                        result[x][y] = result[current.x][current.y] + 1;
+                        q.add(new Pair(x, y));
+
                     }
                 }
             }
