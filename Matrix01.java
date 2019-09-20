@@ -1,7 +1,7 @@
 class Matrix01 {
     // Approach 1 - BFS
     // Time complexity - O(m*n)
-    // Space complexity - (O(m+n))
+    // Space complexity - (O(m*n))
     
     // This function is calculating the distance of non-zero cell from the closet zeroth cell and update into the cell.
     public int[][] updateMatrix(int[][] matrix) {
