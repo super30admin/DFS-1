@@ -2,7 +2,7 @@
  * LeetCode Execution: Initilially missed two test cases. (See Missed Cases Section)
  * 
  * Time Complexity: O(n); N -> Number of pixels
- * Space Complexity: O(1)
+ * Space Complexity: O(n) -> For the internal stack
  * 
  * Approach: Locate the start pixel and then color the connected pixels (depth wise)
  * 
@@ -18,7 +18,7 @@ class Solution {
   int[] dc = {0, 1, 0, -1};
   
   public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
-          
+
       if (image[sr][sc] != newColor) {
           int intCol = image[sr][sc];
           image[sr][sc] = newColor;
