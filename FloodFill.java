@@ -7,7 +7,7 @@
  * Approach: Locate the start pixel and then color the connected pixels (depth wise)
  * 
  * 
- * Cases Missed: 
+ * Cases Missed: (Rectified)
  * -> Forgot to color the starting pixel
  * -> If the image/pixels are being colored with original pixel again, program was entering in a infinite loop
  */
