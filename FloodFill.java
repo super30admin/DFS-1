@@ -21,35 +21,34 @@
  * Time Complexity: O(mn)
  * 
  * Leetcode Result: 
- * TODO The below code contains bugs
+ * Runtime: 1 ms, faster than 86.20% of Java online submissions for Flood Fill.
+ * Memory Usage: 45.9 MB, less than 44.74% of Java online submissions for Flood Fill.
  */
 class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        if(image == null) return image;
         int m = image.length;
+        if(m == 0) return image;
         int n = image[0].length;
-
+        
         Queue<Pair> q = new LinkedList<>();
         q.add(new Pair(sr, sc));
-        int[] x = new int[] { -1, 0, 1, 0 };
-        int[] y = new int[] { 0, 1, 0, -1 };
-        while (!q.isEmpty()) {
+        int[] dx = new int[]{-1, 0, 1, 0};
+        int[] dy = new int[]{0, 1, 0, -1};
+        
+        int srcColor = image[sr][sc];
+        if(srcColor == newColor) return image;
+        while(!q.isEmpty()) {
             Pair current = q.remove();
-            for (int dx : x) {
-                for (int dy : y) {
-                    if (current.x + dx >= 0 && current.x + dx < m && current.y + dy >= 0 && current.y + dy < n
-                            && image[current.x + dx][current.y + dy] == image[current.x][current.y]) {
-                        q.add(new Pair(current.x + dx, current.y + dy));
-                    }
+            image[current.x][current.y] = newColor;
+            for(int i = 0; i < 4; i++) {
+                int x = current.x + dx[i];
+                int y = current.y + dy[i];
+                
+                if(x >= 0 && x < m && y >= 0 && y < n && image[x][y] == srcColor) {
+                    q.add(new Pair(x, y));
                 }
-            }
-            image[current.x][current.y] = -1;
-        }
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (image[i][j] == -1) {
-                    image[i][j] = newColor;
-                }
-            }
+            }                
         }
         return image;
     }
@@ -57,7 +56,6 @@ class Solution {
 
 class Pair {
     int x, y;
-
     Pair(int x, int y) {
         this.x = x;
         this.y = y;
