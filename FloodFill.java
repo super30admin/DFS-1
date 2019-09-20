@@ -6,9 +6,10 @@ Approach: Used BFS approach to flood fill the given image grid. Color the input 
     Explore neighboring pixels of image grid, mark it with new color and put it in the queue if the new pixel
     is not equal to 0 and is not already colored. Finally, return the image grid.
 Time Complexity: O(R*C) where R is number of rows and C is number of columns in the input image grid.
-Space Complexity: Constant
+Space Complexity: Constant - O(n)
 Known Issue: Fails for following input,
     image = [[0,0,0],[0,0,0]] ; sr = 0 ; sc = 0 ; newcolor = 2
+Issue fixed: Previously missed on the source color of input pixel. Added functionality to change the source color pixel to new color.
 */
 
 import java.util.LinkedList;
@@ -22,16 +23,10 @@ public class FloodFill {
         int dir[][] = {{1,0},{-1,0},{0,1},{0,-1}};
         int image_xn = image.length;
         int image_yn = image[0].length;
-
-        /*for(int[] in : image)
-            if(!( (in[0]+in[1]+in[2]) > 0 ));*/
+        int src_color = image[sr][sc];
 
         pixels.add(new int[]{sr,sc});
         image[sr][sc] = newColor;
-
-        if(pixels.isEmpty())
-            return image;
-
 
         while(!pixels.isEmpty()){
             int[] currPixel = pixels.remove();
@@ -39,7 +34,7 @@ public class FloodFill {
                 int x = currPixel[0] + directions[0];
                 int y = currPixel[1] + directions[1];
 
-                if(x<0 || y<0 || x>=image_xn || y>=image_yn || image[x][y]==newColor || image[x][y]==0)
+                if(x<0 || y<0 || x>=image_xn || y>=image_yn || image[x][y]==newColor || image[x][y]!=src_color)
                     continue;
 
                 image[x][y] = newColor;
