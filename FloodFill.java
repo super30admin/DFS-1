@@ -3,8 +3,8 @@
 // Space Complexity : O(1) (if we consider call Stack then O(n))
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : 
-  At first my code was not ending because my base case logic was incorrect.
-  Once I fixed this my solution worked 
+//  At first my code was not ending because my base case logic was incorrect.
+//  Once I fixed this my solution worked 
 
 class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
