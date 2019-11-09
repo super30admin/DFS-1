@@ -2,7 +2,7 @@
 """BFS with visited array"""
 #Accepted by leetcode
 #Time complexity - O(n) as we are visting every pixel
-#Space complexity - O(n) as we are using queue
+#Space complexity - O(n) as we are using queue and visited array
 
 
 class Solution(object):
