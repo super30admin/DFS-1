@@ -42,7 +42,11 @@ class Solution(object):
         return -1
     
     
- from collections import deque
+# optimal solution - BFS approach 
+# time complexity - O(M*N)
+# space complexity -O(m*n)
+
+from collections import deque
 class Solution(object):
     def updateMatrix(self, matrix):
         """
