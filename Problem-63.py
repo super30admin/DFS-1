@@ -40,4 +40,42 @@ class Solution(object):
             dist=dist+1
                 
         return -1
+    
+    
+ from collections import deque
+class Solution(object):
+    def updateMatrix(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        queue=deque()
+        #edge case
+        if not matrix: return matrix
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j]==0:
+                    queue.append((i,j))
+                else:
+                    matrix[i][j]=9999
+        
+    
+        
+        
+        dir=[(0,1),(1,0),(0,-1),(-1,0)]
+        while queue:
+            size=len(queue)
+            for i in range(size):
+                curr=queue.popleft()
+                for (x,y) in dir:
+                    new_r=x+curr[0]
+                    new_c=y+curr[1]
+                    if (0<=new_r<len(matrix) and 0<=new_c<len(matrix[0]) and matrix[new_r][new_c]>matrix[curr[0]][curr[1]]+1):
+                        queue.append((new_r,new_c))
+                        matrix[new_r][new_c]=matrix[curr[0]][curr[1]]+1
+                        
+                    
+                
+        return matrix
+        
         
