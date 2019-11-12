@@ -1,7 +1,4 @@
-"""Accepted on leetcode. But following test case is not passing:
-Input = [[0,0,0],[0,1,0],[1,1,1]]
-Output = [[0,0,0],[0,1,0],[1,1,1]]
-Expected = [[0,0,0],[0,1,0],[1,2,1]]"""
+"""DFS approach"""
 
 #Time complexity - O(MN) as we are visting every element
 #Space complexity - O(MN) as we are using res matrix
@@ -45,7 +42,7 @@ class Solution(object):
                 left =  res[i][j-1]
             bottom = dfs(matrix,res,i+1,j)
             right = dfs(matrix,res,i,j+1)
-            return min(min(left,right), min(top,bottom))
+            return min(min(left,right), min(top,bottom)) + 1#Correction:add 1
             
         for i in range(m):
             for j in range(n):
