@@ -3,8 +3,7 @@ LeetCode Submitted : YES
 Time Complexity : O(N)
 Space Complexity : O(1)
 
-The idea is to fill the pixel with newColor from Original by traversing in DFS fashion. Here, we are creating the backup of the original array to keep track of the original color.
-**/
+The idea is to fill the pixel with newColor from Original by traversing in DFS fashion. We find the sr and sc node and then traverses in horizontal and vertical by recursively changing the next available pixels */
 
 
 class Solution {
