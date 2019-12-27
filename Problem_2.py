@@ -25,7 +25,7 @@ class Solution:
             for i in directions:
                 a = element[0] + i[0]
                 b = element[1] + i[1]
-                if a >= 0 and a < len(matrix) and b < len(matrix[0]) and b >= 0 and                             matrix[a][b] != 0:
+                if a >= 0 and a < len(matrix) and b < len(matrix[0]) and b >= 0 and matrix[a][b] != 0:
                     if matrix[element[0]][element[1]] + matrix[a][b] >= 9999 :
                         queue.append([a,b])
                         matrix[a][b] = matrix[element[0]][element[1]]+1
