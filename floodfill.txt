@@ -1,0 +1,27 @@
+class Solution(object):
+    def floodFill(self, image, sr, sc, newColor):
+        """
+        :type image: List[List[int]]
+        :type sr: int
+        :type sc: int
+        :type newColor: int
+        :rtype: List[List[int]]
+        """
+        q=[]
+        if (len(image)==0 or image[sr][sc]==newColor):
+            return image
+        color=image[sr][sc]
+        image[sr][sc]=newColor
+        q.append([sr,sc])
+        dirs=[[0,1],[0,-1],[1,0],[-1,0]]
+        while(q!=[]):
+            curr=q.pop(0)
+            for dir in dirs:
+                x=dir[0]+curr[0]
+                y=dir[1]+curr[1]
+                if (x>=0 and y>=0 and x<len(image) and y<len(image[0]) and image[x][y]==color):
+                    image[x][y]=newColor
+                    q.append([x,y])
+                
+
+        return image
