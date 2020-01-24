@@ -1,6 +1,6 @@
 // BFS
-// Time Complexity : O(mn)
-// Space Complexity : O(mn)
+// Time Complexity : O(mn) where m is the number of rows in the matrix and n is the number of columns
+// Space Complexity : O(mn) where m is the number of rows in the matrix and n is the number of columns
 // This Solution worked on LeetCode
 
 class Solution {
