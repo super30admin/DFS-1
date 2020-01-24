@@ -5,7 +5,7 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BigN63NearestDistance01MatrixUsingBFSNoLevel {
+public class BigN63NearestDistance01MatrixUsingBFSWithoutLevel {
 	    public int[][] updateMatrix(int[][] matrix) {
 	        int row = matrix.length;
 	        int column = matrix[0].length;
