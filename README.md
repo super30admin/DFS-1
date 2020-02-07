@@ -1,6 +1,6 @@
 # DFS-1
 
-## Problem1 (https://leetcode.com/problems/flood-fill/)
+## Problem62 (https://leetcode.com/problems/flood-fill/)
 An image is represented by a 2-D array of integers, each integer representing the pixel value of the image (from 0 to 65535).
 
 Given a coordinate (sr, sc) representing the starting pixel (row and column) of the flood fill, and a pixel value newColor, "flood fill" the image.
@@ -32,7 +32,7 @@ The length of image and image[0] will be in the range [1, 50].
 The given starting pixel will satisfy 0 <= sr < image.length and 0 <= sc < image[0].length.
 The value of each color in image[i][j] and newColor will be an integer in [0, 65535].
 
-## Problem2 (https://leetcode.com/problems/01-matrix/)
+## Problem63 (https://leetcode.com/problems/01-matrix/)
 Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell.
 
 The distance between two adjacent cells is 1.
