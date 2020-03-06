@@ -1,6 +1,7 @@
 
 class FloodFillBFS {
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        if(image[sr][sc]==newColor)return image;
         int[] dx ={-1,0,0,1};
         int[] dy ={0,-1,1,0};
         int m = image.length;
