@@ -68,3 +68,40 @@ No.
                 color=image[sr][sc]
                 dfs(image,sr,sc,newColor)
                 return image
+
+# Problem 2
+## Time Complexity :
+O(m*n)
+
+## Space Complexity :
+O(m*n)
+
+## Did this code successfully run on Leetcode :
+Yes.
+
+## Any problem you faced while coding this :
+No.
+
+## Your code here along with comments explaining your approach
+### Solution:
+
+from collections import deque
+
+class Solution:
+    def updateMatrix(self, matrix: List[List[int]]) -> List[List[int]]:
+        h, w = len(matrix), len(matrix[0])
+        q = deque()
+        for i in range(h):
+            for j in range(w):
+                if matrix[i][j] == 0:
+                    q += [(i, j)]
+                else:
+                    matrix[i][j] = -1
+        while q:
+            i, j = q.pop()
+            for ai, aj in [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]:
+                if 0 <= ai < h and 0 <= aj < w and matrix[ai][aj] < 0:
+                    matrix[ai][aj] = matrix[i][j] + 1
+                    q.appendleft((ai, aj))
+        
+        return matrix
