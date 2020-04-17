@@ -19,20 +19,18 @@ class Solution(object):
         :type newColor: int
         :rtype: List[List[int]]
         """
-        def dfs(i,j,matrix,m,n):
-            if matrix[i][j] == 1:
-                matrix[i][j] = newColor
+        def dfs(i,j,matrix,m,n,origColor):
+            matrix[i][j] = newColor
 
             directions = [(1,0),(0,1),(-1,0),(0,-1)]
             for x,y in directions:
                 valx = x + i
                 valy = y + j
-                if valx >=0 and valx < m and valy >=0 and valy < n:
-                    dfs(valx,valy,matrix,m,n)
-                return
-        
+                #We need to move only to elements having orig and new color different or else recursion will be endless
+                if valx >=0 and valx < m and valy >=0 and valy < n and matrix[valx][valy] == origColor and newColor != origColor:
+                    dfs(valx,valy,matrix,m,n,origColor)
         m = len(image)
         n = len(image[0])
         
-        dfs(sr,sc,image,m,n)
+        dfs(sr,sc,image,m,n,image[sr][sc])
         return image
