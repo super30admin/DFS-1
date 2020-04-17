@@ -5,43 +5,49 @@
 // Any problem you faced while coding this : No
 // Your code here along with comments explaining your approach
 Algorithm explanation
-DFS
-- Idea is to run DFS on 1 in the matrix and update the value in place
-    as min of all possible zeroes around it
+BFS
+- Initial conf - Update the 1s to inf and add the values with 0 to the queue
+- Idea is to run BFS on 0 in the matrix and update the value in place
+    based on the current distance and next element distance + 1
 """
 
-class Solution(object):
-    def updateMatrix(self, matrix):
-        """
-        :type matrix: List[List[int]]
-        :rtype: List[List[int]]
-        """
-        def dfs(i,j,matrix,m,n,depth):
-            if matrix[i][j] == 0:
-                return depth
-            
-            directions = [(1,0),(0,1),(-1,0),(0,-1)]
-            for x,y in directions:
-                valx = x + i
-                valy = y + j
-                if valx >=0 and valx < m and valy >=0 and valy < n:
-                    #continue the dfs , update the value based on the result
-                    result = min(result,dfs(valx,valy,matrix,m,n,depth+1))
-                    matrix[i][j] = result
-            #return depth
-        
+from collections import deque
+class Solution:
+    def updateMatrix(self, matrix: List[List[int]]) -> List[List[int]]:
         m = len(matrix)
         n = len(matrix[0])
-        one_i,one_j = -1,-1
 
-        #finding the coordinate for the element with value1
+        q = deque()
         for i in range(m):
-            one_found = False
             for j in range(n):
-                if matrix[i][j] == 1:
-                    one_i,one_j = i,j
-                    one_found = True
-            if one_found:
-                break
+                if matrix[i][j] == 0:
+                    q.append((i,j))
+                else:
+                    matrix[i][j] = float("inf")
 
-        dfs(one_i,one_j,matrix,m,n,0)
+        #Having all thepositions of 0 in the matrix, can apply BFS now
+        # new_q = deque()
+        # distance = 1
+
+        directions = [[1,0],[-1,0],[0,1],[0,-1]] #[[i+1,j],[i-1,j],[i,j+1],[i,j-1]]
+
+        while q:
+            curr = q.popleft()
+            #print("curr",curr)
+
+            # level_ans = []
+            # N = len(q)
+
+            for d in directions:
+                i = curr[0] + d[0]
+                j = curr[1] + d[1]
+                
+                #print("i j",i,j)
+
+                #if new cell is out of bounds or closer to another 0, stop bfs
+                if i <0 or i>=m or j < 0 or j>=n or matrix[i][j] <= matrix[curr[0]][curr[1]] + 1:
+                    continue
+
+                q.append((i,j))
+                matrix[i][j] = matrix[curr[0]][curr[1]]+1
+        return matrix
