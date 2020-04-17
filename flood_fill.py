@@ -27,8 +27,12 @@ class Solution(object):
                 valx = x + i
                 valy = y + j
                 #We need to move only to elements having orig and new color different or else recursion will be endless
-                if valx >=0 and valx < m and valy >=0 and valy < n and matrix[valx][valy] == origColor and newColor != origColor:
+                if valx >=0 and valx < m and valy >=0 and valy < n and matrix[valx][valy] == origColor:#and newColor != origColor:
                     dfs(valx,valy,matrix,m,n,origColor)
+        
+        if not image or not image[0] or image[sr][sc] == newColor: #-> this was essentially to avoid back and forth and image won't change
+            return image
+
         m = len(image)
         n = len(image[0])
         
