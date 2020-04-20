@@ -1,6 +1,8 @@
 // Time Complexity: O(m*n)
 // Space Complexity: O(m*n)
 
+
+//BFS solution
 class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
         //edge case
@@ -39,5 +41,34 @@ class Solution {
         }      
         
         return image;
+    }
+}
+
+//DFS SOLUTION
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        //Edge case
+        if(image == null || image.length == 0 || image[0].length == 0 || image[sr][sc] == newColor){
+            return image;
+        }
+        
+        recurr(image, sr, sc, image[sr][sc], newColor);
+        
+        return image;
+    }
+    
+    int[][] dirs = {{0,1},{1,0},{0,-1},{-1,0}};
+    
+    public void recurr(int[][] image, int sr, int sc, int sourceColor, int newColor){
+        image[sr][sc] = newColor;
+        
+        for(int[] direction: dirs){
+            int r = sr + direction[0];
+            int c = sc + direction[1];
+            
+            if(r >= 0 && r<image.length && c>=0 && c<image[0].length && (image[r][c] == sourceColor)){
+                recurr(image, r, c, sourceColor, newColor);
+            }
+        }
     }
 }
