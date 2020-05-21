@@ -1,54 +1,42 @@
-// Time Complexity : O(rows*columns)
-// Space Complexity : O(rows*columns)
-// Did this code successfully run on Leetcode :
-// Any problem you faced while coding this :
-
-
-// Your code here along with comments explaining your approach
-
 class Solution {
     public int[][] updateMatrix(int[][] matrix) {
         
-        int row = matrix.length;
-        int col = matrix[0].length;
+        int rowLen = matrix.length,colLen = matrix[0].length;
+        int[][] result = new int[rowLen][colLen];
         
-        int[][] res = new int[row][col];
-        int[][] dir = {{0,1},{1,0},{0,-1},{-1,0}};
-        
-        Queue<Pair<Integer,Integer>> q = new LinkedList<>();
-        
-        for(int i=0;i<row;i++) {
-            for(int j=0;j<col;j++) {
-                
-                if(matrix[i][j] == 0) {
-                    
-                    q.add(new Pair(i,j));
-                }
+        Queue<Integer> q = new LinkedList<>();
+        for(int i=0;i<rowLen;i++){
+            for(int j=0;j<colLen;j++){
+                if(matrix[i][j]==0)
+                    q.add(i*colLen+j);
             }
         }
-
-        while(!q.isEmpty()) {
+        
+        while(!q.isEmpty()){
+            int val = q.poll();
+            int row = val/colLen;
+            int col = val%colLen;
             
-            Pair<Integer,Integer> p = q.poll();
-            int r = p.getKey();
-            int c = p.getValue();
-
-            for(int j=0;j<4;j++) {
-
-                int ro = r+dir[j][0];
-                int co = c+dir[j][1];
-
-                if(ro<0 || co <0 || ro >= row || co >= col || matrix[ro][co] == 0)
-                    continue;
-
-                res[ro][co] = res[r][c]+1;
-                matrix[ro][co] = 0;
-                q.add(new Pair(ro,co));
-
+            helper(row,col,matrix,q,result);
+            
+            
+        }
+        return result;
+    }
+        
+    public void helper(int r, int c, int[][] matrix, Queue<Integer> q, int[][] result){
+        int ax[] = {-0,1,0,-1};
+        int ay[] = {1,0,-1,0};
+        
+        for(int i=0;i<4;i++){
+            int x=r+ax[i];
+            int y=c+ay[i];
+            
+            if(x>=0 && y>=0 && x<matrix.length && y<matrix[0].length && matrix[x][y]!=0){
+                result[x][y]=result[r][c]+1;
+                matrix[x][y]=0;
+                q.add(x*matrix[0].length+y);
             }
         }
-        
-        return res;
     }
-    
 }
