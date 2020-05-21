@@ -48,7 +48,8 @@ class Solution {
 
 class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
-        
+        if(newColor==image[sr][sc])
+            return image;
         dfs(image, image.length, image[0].length, sr, sc, image[sr][sc], newColor);
         return image;
         
@@ -64,8 +65,9 @@ class Solution {
             
             if(x>=0 && y>=0 && x<rowLen && y<colLen && image[x][y]==connected){
                 image[x][y]=newColor;
-                dfs(image,rowLen,colLen,x,y,connected, newColor, set);
+                dfs(image,rowLen,colLen,x,y,connected, newColor);
             }
         }
     }
+}
 }
