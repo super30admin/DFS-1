@@ -1,0 +1,29 @@
+// Time Complexity :O(n*m)
+// Space Complexity : O(n*m)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        int c = image[sr][sc];  // get the color of the given index of matrix
+        if(c!= newColor) dfs(image,sr,sc,c,newColor); // dfs from that point if the color of index is not same as newcolor
+        return image; // return the matrix
+    }
+    public void dfs(int[][] image,int sr,int sc,int co, int newColor){
+        /* edge if the row and column is within the boundary and the index color is not same as old color */
+        if( sr >= image.length || sr< 0 || sc>= image[0].length || sc< 0 || image[sr][sc] != co )
+            return;
+        // change color of that index
+        image[sr][sc] = newColor;
+        /* move in 4 direction to that index */
+        dfs(image,sr+1,sc,co,newColor);
+        dfs(image,sr-1,sc,co,newColor);
+        dfs(image,sr,sc-1,co,newColor);
+        dfs(image,sr,sc+1,co,newColor);
+    }
+    
+    /* bfs approach 
+    add that index to queue and then calculate the size and within that size pull from queue and change their value if they have
+    color as old color and put neighbouring four in queue
+    */
+}
