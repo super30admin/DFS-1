@@ -1,5 +1,5 @@
 //time o(mn) m - no of rows, n - no of cols
-//space
+//space o(m+n)
 //BFS
 class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
