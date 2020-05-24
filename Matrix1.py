@@ -1,5 +1,5 @@
 #Time Complexity : O(N) where N is number of element
-#Space Complexity : O(B) where B is min(number of row,numberof columns)
+#Space Complexity : O(B) where B is maximum breadth
 
 class Solution(object):
     def updateMatrix(self, matrix):
