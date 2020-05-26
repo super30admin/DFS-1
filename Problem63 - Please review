@@ -1,0 +1,45 @@
+// Time Complexity :O(n)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :Yes
+
+class Solution {
+    func floodFill(_ image: [[Int]], _ sr: Int, _ sc: Int, _ newColor: Int) -> [[Int]] {
+        let rowCount = image.count
+        let colCount = image[0].count 
+        
+        var row = Array<Bool>(repeating: false, count: colCount)
+        var visited = Array<Array<Bool>>(repeating: row, count: rowCount)
+        
+        var result: [[Int]] = image
+        
+        putColor(image, &visited, sr, sc, newColor, image[sr][sc], &result)
+        return result
+    }
+    
+    func putColor(
+        _ image: [[Int]], 
+        _ visited: inout [[Bool]], 
+        _ sr: Int, 
+        _ sc: Int, 
+        _ newColor: Int, 
+        _ oldColor: Int, 
+        _ result: inout [[Int]]
+    ) {
+        if visited[sr][sc] { return }
+        visited[sr][sc] = true
+        result[sr][sc] = newColor
+        
+        if sr-1 >= 0 && image[sr-1][sc] == oldColor {
+            putColor(image, &visited, sr-1, sc, newColor, oldColor, &result)
+        }
+        if sr+1 < image.count && image[sr+1][sc] == oldColor {
+            putColor(image, &visited, sr+1, sc, newColor, oldColor, &result)
+        }
+        if sc-1 >= 0 && image[sr][sc-1] == oldColor {
+            putColor(image, &visited, sr, sc-1, newColor, oldColor, &result)
+        }
+        if sc+1 < image[0].count && image[sr][sc+1] == oldColor {
+            putColor(image, &visited, sr, sc+1, newColor, oldColor, &result)
+        }
+    }
+}
