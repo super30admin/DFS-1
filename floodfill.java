@@ -1,5 +1,5 @@
 // Time Complexity :O(m*n) m-row length n-column length
-// Space Complexity :O(h)  
+// Space Complexity :O(m*n)  
 // Did this code successfully run on Leetcode :yes
 // Problems Faced: -
 //DFS
