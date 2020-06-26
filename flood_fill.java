@@ -1,6 +1,6 @@
 /**
  * BFS: O(m*n) m,n rows and col of the image
- * space: O(max(m,n))
+ * space: O(min(m,n))
  */
 class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
