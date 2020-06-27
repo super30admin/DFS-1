@@ -1,0 +1,67 @@
+// Time Complexity : O(m*n)- all the elements in the image
+// Space Complexity : O(m*n) - all the elements in the image can be added in the worst case.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach - DFS approach. add all the neighbors in a stack. If the existing color is not the newColor, change the color and add it to the stack to check for its neighbors.
+
+
+class Solution {
+    int[][] dirs;
+    int color;
+    int m;int n;
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        //edge case
+        if(image==null || image.length==0 || newColor== image[sr][sc] ) return image;
+        m=image.length; n=image[0].length;
+        color=image[sr][sc];
+        dirs= new int[][]{{0,1},{1,0},{-1,0},{0,-1}};
+        dfs(image,sr,sc,newColor);
+        return image;
+    }
+    private void dfs(int[][] image,int r,int c,int newColor){
+        //base
+        if(r<0 || c<0 || r>=m || c>=n || image[r][c]!=color) return;
+        //logic
+        image[r][c]=newColor;
+        for(int[] dir:dirs){
+            int rn =r+dir[0];
+            int cn=c+dir[1];
+            dfs(image,rn,cn,newColor);
+        }  
+    }
+}
+
+// Time Complexity : O(m*n)- all the elements in the image
+// Space Complexity : O(m*n) - all the elements in the image can be added in the worst case.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach - BFS approach add all the neighbors in a queue.If the existing color is not the newColor, change the color and add it to the queue to check for its neighbors.
+
+
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        //edge case
+        if(image==null || image.length==0 || newColor== image[sr][sc] ) return image;
+        int color=image[sr][sc];
+        int m=image.length; int n=image[0].length;
+        Queue<int []> q=new LinkedList<>();
+        q.add(new int[]{sr,sc});
+        image[sr][sc]=newColor;
+        int[][] dirs={{0,1},{1,0},{-1,0},{0,-1}};
+        while(!q.isEmpty()){
+            int[] curr=q.poll();
+            for(int[] dir: dirs){
+                int r=curr[0]+dir[0];int c=curr[1]+dir[1];
+                 if(r>=0 && r<m && c>=0 && c<n && image[r][c]==color){
+                     q.add(new int[] {r,c});
+                     image[r][c]=newColor;
+                 }
+            }
+        }
+       return image; 
+    }
+}
