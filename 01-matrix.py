@@ -6,6 +6,9 @@
 # Your code here along with comments explaining your approach
 from collections import deque
 class Solution(object):
+    # This approach uses a BFS where neighbors are processed level by level from
+    # all 0s present in the matrix. The distance is incremented with every level
+    # and set at the respective positions and the next level is added for processing.
     def updateMatrix(self, matrix):
         if not matrix:
             return matrix
