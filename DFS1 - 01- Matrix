@@ -1,0 +1,39 @@
+//Time Complexity: O(m*n)
+//Space Cpmplexity: O(m*n)
+
+Did this code run on leetcode: Yes
+
+//Approach - BFS
+
+class Solution(object):
+    def updateMatrix(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        R = len(matrix)
+        C = len(matrix[0])
+        q = deque()
+        for i in range(R):
+            for j in range(C):
+                if(matrix [i][j] ==1 ):
+                    matrix[i][j] =-1
+                else:
+                    q.append([i,j])
+                    
+        dirs = [[0,1],[0,-1],[-1,0],[1,0]]
+        dist = 1
+        while q:            
+            qlen = len(q)           
+            for l in range(qlen):
+                curr = q.popleft()
+                for dir1 in dirs:
+                    nr = curr[0] + dir1[0]
+                    nc = curr[1]+ dir1[1]
+                    if(nr>=0 and nr<R and nc>=0 and nc<C and matrix[nr][nc]==-1):
+                            matrix[nr][nc] == dist
+                            q.append([nr,nc])
+            dist = dist+1
+        return matrix
+        
+        
