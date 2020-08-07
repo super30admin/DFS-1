@@ -1,0 +1,20 @@
+Approach1 : BFS
+Time Complexity : O(M*N)
+Space Complexity : O(M*N)
+class Solution:
+    def floodFill(self, image, sr, sc, newColor):
+        m, n = len(image), len(image[0])
+        color=image[sr][sc] ## Original Color
+        q = collections.deque([])
+        image[sr][sc]=newColor ## Changing the color
+        q.append((sr,sc))
+        dirs=[(0,1),(1,0),(-1,0),(0,-1)]
+        while q:
+            row,col=q.popleft()
+            for dire in dirs:
+                r=row+dire[0]
+                c=col+dire[1]
+                if r>=0 and c>=0 and r<m and c<n and image[r][c]==color:
+                    image[r][c]=newColor
+                    q.append((r,c))
+        return image
