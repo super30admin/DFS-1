@@ -1,0 +1,5 @@
+Approach 1:
+Time COmplexity: O(N) ---> O(mn)
+Space Complexity :O(N) worst case all the elements go into stack
+
+
