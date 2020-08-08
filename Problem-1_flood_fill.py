@@ -1,6 +1,6 @@
 # APPROACH 1: BFS
 # Time Complexity : O(mn), m: number of rows of the image, n: number of columns of the image
-# Space Complexity : O(1), visited and changing to newColor in-place
+# Space Complexity : O(m*n): space taken up by queue. O(1), visited and changing to newColor in-place
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : None
 #
