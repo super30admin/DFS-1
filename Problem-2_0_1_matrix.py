@@ -1,6 +1,6 @@
 # APPROACH  1
 # Time Complexity : O(nm), n: number of rows of the matrix, m: number of columns of the matrix
-# Space Complexity : O(1)
+# Space Complexity : O(m*n): space taken up by queue
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : None
 #
@@ -47,7 +47,7 @@ class Solution:
 
 # APPROACH  2
 # Time Complexity : O(nm), n: number of rows of the matrix, m: number of columns of the matrix
-# Space Complexity : O(1)
+# Space Complexity : O(m*n): space taken up by queue
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : None
 #
@@ -91,7 +91,7 @@ class Solution:
 
 # APPROACH  3
 # Time Complexity : O(nm), n: number of rows of the matrix, m: number of columns of the matrix
-# Space Complexity : O(1)
+# Space Complexity : O(m*n): space taken up by queue
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : None
 #
