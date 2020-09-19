@@ -1,6 +1,6 @@
-// Time Complexity :
-// Space Complexity :
-// Did this code successfully run on Leetcode :
+// Time Complexity :O(N) N is total number of pixels
+// Space Complexity :recursion stack + O(1)
+// Did this code successfully run on Leetcode :yes
 // Any problem you faced while coding this :
 
 
