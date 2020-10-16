@@ -1,0 +1,42 @@
+//Time complexity : O(mn)
+//space complexity: O(mn) worst case
+// th e idea is to do bfs string from all zeros, find the shortest distance to zeros for each one and keep adding into the the quee the upadared distance cooordiantes, the updated distance coordibates are the shotest distnce to their coordinates, then they further help to find shortest distance to ther neighbouring cooridaintes.
+// asper implementation purpose, inotiliz all 1's in matrix having distance to zeros = Integer.MAX_VALUE
+// on finding the distance the cooridate with gives it a shortest distance to zero. distnce of coordinate having value zero has distance to zero = 0, we suse this general statement to find shortest distanec to zeros for each highes values which have been initilized to Integer.MAX_VALUE
+class Solution {
+    public int[][] updateMatrix(int[][] matrix) {
+        
+        Queue<int[]> que = new LinkedList<>();
+        
+        for(int i =0; i<matrix.length; i++){
+            for(int j =0; j<matrix[0].length; j++){
+                    if(matrix[i][j] == 0)
+                        que.add(new int[]{i, j});
+                    else if(matrix[i][j] == 1){
+                        matrix[i][j] = Integer.MAX_VALUE;
+                    }
+               }
+        }
+        int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        while(! que.isEmpty()){
+            
+            int size = que.size();
+            for(int i=0; i<size; i++){
+                int[] pair = que.poll();
+                int row = pair[0];
+                int col = pair[1];
+                
+                for(int[] dir : dirs){
+                int r = dir[0] + row;
+                int c = dir[1] + col;
+                
+        if(r >= 0 && c >= 0 && r < matrix.length && c < matrix[0].length && matrix[r][c] > matrix[row][col]+1){
+                    matrix[r][c] = matrix[row][col] + 1;
+                    que.add(new int[]{r, c});
+                 }
+                }
+            }
+        }
+        return matrix;
+    }
+}
