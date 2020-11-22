@@ -1,0 +1,184 @@
+/*
+Approach 1: 
+Time Complexity: O(n2)
+
+Space Complexxity: O(1) // ignoring recursive stack
+
+Leetcode: Successful
+
+approach: This is not dfs, this is a brute force solution.
+make all 1's infinity
+
+iterate through the matrix, attend only those elements which can be resolved in first hop.
+now again iterate in reverse direction [since, bottom elements must have distance to nearest 0], this time check top bottom left right, if you can get minmum distance for 0
+
+
+Approach 2 - bfs:
+Time Complexity: O(n2)
+Space Complexity: O(n2) queue[worst case when there are a lot of 0's]
+Leetcode: Successful 
+
+approach:
+
+make all 1's infinity
+push all 0's in the queue.
+
+for each queue element, if it is 0, make all the children 1, and push to the stack, if it is already 1, dont do it.
+if the element is not 0, check if the value of its children is less than my own value, if yes, skip, else, update the childs path with the minimum of both and push the child's child.
+
+
+
+*/
+
+// Approach-1
+class Solution {
+    int [][] dirs;
+    public int[][] updateMatrix(int[][] matrix) {
+        
+        dirs = new int [][] {{1,0},{0,1},{-1,0},{0,-1}};
+        for(int i=0;i<matrix.length;i++)
+            for(int j=0;j<matrix[0].length;j++)
+                if(matrix[i][j]==1) matrix[i][j]=Integer.MAX_VALUE;
+        
+        
+        for(int i=0;i<matrix.length;i++)
+            for(int j=0;j<matrix[0].length;j++)
+                if(matrix[i][j]!=0 && matrix[i][j]==Integer.MAX_VALUE)
+                {
+                    int res=dfsHelper(matrix,i,j,i,j);
+                }
+
+        
+
+         for(int i=matrix.length-1;i>=0;i--)
+            for(int j=matrix[0].length-1;j>=0;j--)
+            {
+                if(matrix[i][j]!=0 )
+                {               
+                    int [] min = new int [4];
+                    int k=0;
+                    int minDist=Integer.MAX_VALUE;
+                    for(int [] dir : dirs)
+                    {
+                        int p=i+dir[0];
+                        int q=j+dir[1];
+                         if(p>=0 && p< matrix.length && q>=0 && q<matrix[0].length&& matrix[p][q]!=0)
+                         {
+                             min[k]=matrix[p][q];
+                             if(minDist>min[k]) minDist=min[k];
+                             k++;
+                         }  
+                    }
+                    matrix[i][j]=Math.min(matrix[i][j]-1,minDist)+1;
+                }
+            }
+        
+        return matrix;
+    }
+    
+    int dfsHelper(int [][]matrix, int r,int c,int prevr,int prevc)
+    {
+        // base case
+        if(matrix[r][c]==0) return 1;
+        if(matrix[r][c]!=Integer.MAX_VALUE) return matrix[r][c]+1; 
+
+        int [] min = new int [4];
+        int k=0;
+        int minDist=Integer.MAX_VALUE;
+        for(int [] dir : dirs)
+        {
+            int i=r+dir[0];
+            int j=c+dir[1];
+            
+            if(i>=0 && i< matrix.length && j>=0 && j<matrix[0].length)
+            {
+                if((i==prevr && j== prevc) || matrix[i][j] ==Integer.MAX_VALUE )
+                {
+                    continue;
+                }
+                    min[k]= dfsHelper(matrix,i,j,r,c);
+                    if(minDist>min[k]) minDist=min[k];
+                    k++;
+            }
+        }
+        if(minDist<matrix[r][c]) matrix[r][c]=minDist;
+        
+        return matrix[r][c]+1;
+            
+        }
+        
+        
+        
+    }
+
+
+// Approach-2:
+class Solution {
+    public int[][] updateMatrix(int[][] matrix) {
+        
+        int m=matrix.length;
+        int n=matrix[0].length;
+        
+        Queue<int []> qu = new LinkedList<>();
+        
+        
+        for(int i=0;i<m;i++)
+            for(int j=0;j<n;j++)
+            {
+                if(matrix[i][j]==0)
+                {
+                    qu.add(new int []{i,j});
+                }
+                else{
+                    matrix[i][j]=Integer.MAX_VALUE;
+                }
+                
+            }
+        int [] element = new int [2];
+        int [][] dirs = new int [][]{{1,0},{0,1},{-1,0},{0,-1}};
+       
+        while(qu.size()>0)
+        {
+            
+            System.out.println(qu.size());
+            int minDist=Integer.MAX_VALUE;
+            element=qu.poll();
+        
+            for(int [] dir : dirs)
+            {
+                int p=element[0]+dir[0];
+                int q=element[1]+dir[1];
+                
+                if(p>=0 && p< matrix.length && q>=0 && q<matrix[0].length && matrix[p][q]!=0)
+                {
+                   if(matrix[element[0]][element[1]]==0)
+                   {
+                       if(matrix[p][q]==1) continue;
+                       matrix[p][q]=1;
+                       qu.add(new int []{p,q});
+                   }
+                    else{
+                        
+                        if(matrix[p][q]<=matrix[element[0]][element[1]])
+                        {
+                            continue;
+                        }
+                        else{
+                             matrix[p][q] =  Math.min(matrix[p][q]-1,matrix[element[0]][element[1]])+1;
+                            qu.add(new int[]{p,q});
+                        }
+                    
+                        
+                        
+                    }
+                }
+            }
+            }   
+            
+        
+        return matrix;
+        }
+        
+    }
+    
+     
