@@ -1,0 +1,33 @@
+Flood Fill
+
+# Time Complexity: O(m*n)
+# Space Complexity: O(m*n), recursive stack close to all elements
+# Did this code successfully run on LeetCode: Yes
+
+# Three line Explanation:
+# 1. Get the color of the current entry (starting entry)
+# 2. Call DFS on the current entry, change the color, and visit all neighbours recursively
+# 3. When we reach an entry that does not have the required color, just return
+
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+        if image is None and len(image) == 0:
+            return image
+        self.image = image
+        self.toChange = self.image[sr][sc]
+        self.newColor = newColor
+        self.dirs = [(0,1),(1,0),(0,-1),(-1,0)]
+        self.helper(sr, sc, set())
+        return self.image
+    
+    def helper(self, row, col, visited):
+        if (row,col) in visited:
+            return
+        self.image[row][col] = self.newColor
+        visited.add((row,col))
+        for each in self.dirs:
+            r = row + each[0]
+            c = col + each[1]
+            if r >= 0 and r < len(self.image) and c >= 0 and c < len(self.image[0]) and self.image[r][c] == self.toChange:
+                self.helper(r, c, visited)
+        return
