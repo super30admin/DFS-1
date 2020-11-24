@@ -1,0 +1,38 @@
+# Time Complexity: O(m*n)
+# Space Complexity: O(max(m,n))
+# Did this code successfully run on LeetCode: Yes
+
+# Three line Explanation:
+# 1. Go through each entry
+# 2. Run a BFS for each entry and change the entry to the level at which 0 is found
+# 3. Return the same array
+
+class Solution:
+    def updateMatrix(self, matrix: List[List[int]]) -> List[List[int]]:
+        if matrix is None or len(matrix) == 0:
+            return []
+        self.grid = matrix
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                self.grid[i][j] = self.BFS(i, j)
+        return self.grid
+    
+    def BFS(self, row, col):
+        if self.grid[row][col] == 0:
+            return 0
+        queue = collections.deque()
+        queue.append((row,col))
+        dirs = [(0,1), (1,0), (0,-1), (-1,0)]
+        count = 0
+        while queue:
+            size = len(queue)
+            count += 1
+            for i in range(size):
+                cur = queue.popleft()
+                for each in dirs:
+                    r = cur[0] + each[0]
+                    c = cur[1] + each[1]
+                    if r >= 0 and r < len(self.grid) and c >= 0 and c < len(self.grid[0]):
+                        if self.grid[r][c] == 0:
+                            return count
+                        queue.append((r,c))
