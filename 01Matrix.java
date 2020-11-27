@@ -1,5 +1,5 @@
 // Time Complexity :  O(N) no of elements
-// Space Complexity : O(N) - worst case stack adding all elements
+// Space Complexity : O(N)
 // Did this code successfully run on Leetcode :Yes
 // Any problem you faced while coding this :No
 
