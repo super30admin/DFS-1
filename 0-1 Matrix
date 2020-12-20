@@ -1,0 +1,45 @@
+//Time Complexity: O(m*n)
+//Space Complexity: O(m*n)
+
+//Aproach: BFS traverse. Idea is similar to Course Schedule check for dependency and add independent(0's) to the queue. Also update level for new queue.
+//Hint: TO keep track of visited 1's convert them to -ve value.
+
+class Solution {
+    public int[][] updateMatrix(int[][] matrix) {
+        if(matrix==null || matrix.length==0){
+            return matrix;
+        }
+        
+        Queue<int[]> que = new LinkedList<>();
+        int level = 1;
+        for(int i = 0 ; i < matrix.length ; i++ ){
+            for(int j = 0 ; j < matrix[0].length ; j++){
+                if(matrix[i][j]==0){
+                    que.add(new int[]{i,j});
+                }else {
+                    matrix[i][j] = -1;
+                }
+            }
+        }
+        int[][] dirs = {{0,-1},{0,1},{1,0},{-1,0}};
+        
+        while(!que.isEmpty()){
+            int size = que.size();
+            // System.out.println(size);
+            for(int i = 0 ; i < size ; i++){
+                int[] current = que.poll();
+                
+                for(int[] dir : dirs){
+                    int r = current[0] + dir[0];
+                    int c = current[1] + dir[1];
+                    if(r>=0 && c>=0 && r<matrix.length && c< matrix[0].length && matrix[r][c]==-1){
+                        matrix[r][c] = level;
+                        que.add(new int[]{r,c}); 
+                    }
+                }
+            }
+            level++;
+        }
+        return matrix;
+    }
+}
