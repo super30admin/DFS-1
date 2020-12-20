@@ -1,0 +1,41 @@
+//Time Complexity: O(m*n)
+//Space Complexity: O(m*n)
+
+/Aproach: Idea is to perform BFS traverse and change color of visited nodes to new color.
+Hint: Check if neighbor element is of same color or not before modifying it.
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        //Using BFS
+        
+        if(image.length==0 || image == null || image[sr][sc]==new color){
+            return image;
+        }
+        
+        //int[] to store co-ordinates
+        Queue<int[]> que = new LinkedList<>();
+        int currColor = image[sr][sc];
+        
+        //TO navigate 4 directions
+        int[][] dirs = {{-1,0},{1,0},{0,1},{0,-1}};
+        que.add(new int[]{sr,sc});
+        
+        while(!que.isEmpty()){
+            int[] current = que.poll(); 
+            int row = current[0];
+            int col = current[1];
+            
+            //Updating current pixel to visited: i.e-> newColor
+            image[row][col] = newColor;
+            
+            //BFS Traverse
+            for(int[] dir : dirs){
+                 row = dir[0] + current[0];
+                 col = dir[1] + current[1];
+                 if(row >= 0 && col >= 0 && row < image.length && col < image[0].length && image[row][col]==currColor){ 
+                      que.add(new int[]{row,col});  
+                }
+            }
+        }
+        return image;  
+    }
+}
