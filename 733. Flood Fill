@@ -1,0 +1,20 @@
+from collections import deque
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+        nrows, ncols = len(image), len(image[0]);
+        visited = [[False]*ncols for i in range(nrows)];
+        queue= deque();
+        queue.append((sr,sc));
+        oldcolor = image[sr][sc];
+        image[sr][sc]= newColor;
+        visited[sr][sc] = True
+        while(queue):
+            x,y = queue.popleft();
+            image[x][y]= newColor;
+            for dx, dy in [[0,1], [0,-1], [1,0], [-1,0]]:
+                if(0 <= x+dx < nrows and 0 <= y+dy < ncols and image[x+dx][y+dy] == oldcolor and not visited[x+dx][y+dy]):
+                    visited[x+dx][y+dy] = True;
+                    queue.append((x + dx, y + dy));
+        return image;
+        
+    

@@ -1,0 +1,22 @@
+from collections import deque
+class Solution:
+    def updateMatrix(self, matrix: List[List[int]]) -> List[List[int]]:
+        nrows, ncols = len(matrix), len(matrix[0]);
+        distance = [[0]*ncols for i in range(nrows)]
+        visited = [[False]*ncols for i in range(nrows)];
+        queue = deque();
+        for i in range(nrows):
+            for j in range(ncols):
+                if(matrix[i][j] == 0):
+                    queue.append((i,j, 0));
+                    visited[i][j] = True;
+        while(queue):
+            x, y, level = queue.popleft();
+            distance[x][y] = level
+            for dx, dy in [[0,1], [0, -1], [1, 0], [-1, 0]]:
+                if(0 <= x+dx < nrows and 0 <= y + dy < ncols and not visited[x+dx][y+dy]):
+                    visited[x+dx][y+dy] = True;
+                    queue.append((x+dx, y + dy, level + 1));
+        return distance;
+        
+        
