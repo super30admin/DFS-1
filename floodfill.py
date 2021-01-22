@@ -1,5 +1,5 @@
-# Time Complexity : O(N)
-# Space Complexity : O(N) 
+# Time Complexity : O(MN)
+# Space Complexity : O(MN) 
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : Yes.. I thought four directions 
 # meant vertical, horizontal, and two diagonals. Also had small boundary issues to fix
