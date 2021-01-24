@@ -1,0 +1,37 @@
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        
+        
+        //733. Flood Fill
+        //Using BFS
+        //Time complexity : O(m*n) where 'm' is the no. of rows and 'n' is no. of                                   columns
+        //Space complexity : O(m*n)
+        if(image == null || image.length==0 || image[sr][sc]==newColor)
+            return image;
+        
+        int orgColor = image[sr][sc];
+        image[sr][sc]=newColor; 
+         int rows = image.length;
+        int cols = image[0].length;
+        
+        Queue<int[]> q = new LinkedList<>();
+        int[][] dirs ={{0,-1},{0,1},{1,0},{-1,0}};
+        q.add(new int[]{sr,sc});
+        while(!q.isEmpty()){
+            int size = q.size();
+            for(int i=0;i<size;i++){
+                int[] current = q.poll();
+                for(int[] dir :dirs){
+                    int r = current[0]+dir[0];
+                    int c = current[1]+dir[1];
+                    if(r>=0 && r<rows && c>=0 && c<cols && image[r][c] == orgColor ){
+                        image[r][c]=newColor;
+                        q.add(new int[]{r,c});
+                    }
+                }
+            }
+            
+        }
+        return image;
+    }
+}
