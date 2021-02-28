@@ -1,3 +1,6 @@
+/* Time: O(n) - process each cell
+S: O(n) worst case all are 0s
+*/
 class Solution {
     public int[][] updateMatrix(int[][] matrix) {
         if(matrix == null) return matrix;
