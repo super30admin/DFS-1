@@ -45,5 +45,38 @@ class Solution {
 }
 
 DFS
-
+class Solution {
+    int m, n, orgColor;
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        if(image.length == 0 || image == null || image[sr][sc] == newColor)
+            return image;
+       
+         m = image.length;
+         n = image[0].length;
+         orgColor = image[sr][sc];
+        dfs(image, sr, sc, newColor);
+        return image;
+       
+        
+    }
+    
+    private void dfs(int[][] image, int sr, int sc, int newColor)
+    {
+        //base
+        if(sr < 0 || sr == m || sc <0 || sc==n || image[sr][sc] != orgColor)
+            return;
+        
+        
+        //
+        image[sr][sc] = newColor;
+         int[][] dirs = {{0,1},{0,-1},{1,0},{-1,0}};
+        for(int[] d: dirs)
+        {
+            int r = sr +d[0];
+            int c = sc + d[1];
+            dfs(image, r, c, newColor);
+        }
+    }
+}
+    
    
