@@ -1,0 +1,68 @@
+// Time Complexity : O(m x n) 
+// Space Complexity : O(m x n) - queue
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this :
+
+
+// Your code here along with comments explaining your approach
+class Solution {
+    int n,m;
+    int value;
+    public int[][] updateMatrix(int[][] matrix) {
+        
+        if(matrix == null || matrix.length == 0)
+            return matrix;
+        
+        int m = matrix.length;
+        int n = matrix[0].length;
+        
+        //int[][] updMatrix = new int[m][n];
+        
+        Queue<int[]> bfsQ = new LinkedList<>();
+        
+        for(int i=0; i<m; i++)
+        {
+            for(int j=0; j<n; j++)
+            {
+                if(matrix[i][j] == 0)
+                {
+                    bfsQ.add(new int[] {i,j});
+                }
+                else
+                {
+                     matrix[i][j] = -1;
+                }
+            }
+        }
+        
+        //int level = 1;
+        int[][] dirs = {{0,1},{0,-1},{1,0},{-1,0}};
+        
+        while(!bfsQ.isEmpty())
+        {
+            int size = bfsQ.size();
+            //System.out.println(size);
+            //for(int i=0; i<size; i++)
+            {
+                int[] temp = bfsQ.poll();
+                
+                for(int[] d : dirs)
+                {
+                    int r = temp[0]+ d[0];
+                    int c = temp[1]+ d[1];
+                    
+                    if( 0<= r && r<m && 0<=c && c<n && matrix[r][c] == -1)
+                    {
+                        matrix[r][c] = matrix[temp[0]][temp[1]] + 1;
+                        bfsQ.add(new int[] {r,c});
+                    }
+                        
+                    
+                }
+            }
+            //level++;
+        }
+       return matrix;
+    }
+    
+}
