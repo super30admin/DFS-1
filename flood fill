@@ -1,0 +1,82 @@
+// Time Complexity :O(mxn)
+// Space Complexity :O(mxn)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this :
+dirs array 
+
+// Your code here along with comments explaining your approach
+bfs 
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        if(image.length == 0 || image == null || image[sr][sc] == newColor)
+            return image;
+       
+        
+        Queue<Integer> q = new LinkedList<>();
+        q.add(sr);
+        q.add(sc);
+        
+        int m = image.length;
+        int n = image[0].length;
+        int orgColor = image[sr][sc];
+        image[sr][sc] = newColor;
+        int[][] dirs = {{0,1},{0,-1},{1,0},{-1,0}};
+        
+        while(!q.isEmpty())
+        {
+            int cr = q.poll();
+            int cc = q.poll();
+            for(int[] d : dirs)
+            {
+                int r = cr+d[0];
+                int c = cc+d[1];
+                
+                if(r >= 0 && r < m && c >=0 && c < n && image[r][c] == orgColor)
+                {
+                    image[r][c] = newColor;
+                    q.add(r);
+                    q.add(c);
+                }
+                    
+            }
+        }
+        return image;
+    }
+}
+
+DFS
+class Solution {
+    int m, n, orgColor;
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        if(image.length == 0 || image == null || image[sr][sc] == newColor)
+            return image;
+       
+         m = image.length;
+         n = image[0].length;
+         orgColor = image[sr][sc];
+        dfs(image, sr, sc, newColor);
+        return image;
+       
+        
+    }
+    
+    private void dfs(int[][] image, int sr, int sc, int newColor)
+    {
+        //base
+        if(sr < 0 || sr == m || sc <0 || sc==n || image[sr][sc] != orgColor)
+            return;
+        
+        
+        //
+        image[sr][sc] = newColor;
+         int[][] dirs = {{0,1},{0,-1},{1,0},{-1,0}};
+        for(int[] d: dirs)
+        {
+            int r = sr +d[0];
+            int c = sc + d[1];
+            dfs(image, r, c, newColor);
+        }
+    }
+}
+    
+   
