@@ -3,7 +3,7 @@
 
 class Solution {
     public int[][] updateMatrix(int[][] mat) {
-        
+        if(mat == null || mat.length == 0) return mat;
         int m = mat.length;
         int n = mat[0].length;
         
@@ -21,8 +21,6 @@ class Solution {
         
         int [][] dirs = {{0,1}, {1,0}, {-1,0}, {0,-1}};
         while(!q.isEmpty()){
-            int size = q.size();
-            for(int i=0; i<size; i++){
                 int[] curr = q.poll();
                 for(int[] dir: dirs){
                     int nr = curr[0] + dir[0];
@@ -32,7 +30,6 @@ class Solution {
                         mat[nr][nc] = mat[curr[0]][curr[1]] + 1;
                     }
                 }
-            }
         }
         return mat;
     }
