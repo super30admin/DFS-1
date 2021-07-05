@@ -1,0 +1,65 @@
+BFS
+------
+Time: O(m*n) M is no. of rows and n is num of columns
+Space: O(m*n)
+
+class Solution {
+	public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+		int color = image[sr][sc];
+		//edge 
+		if(image == null || image.length == 0 || color == newColor) return image;
+
+		//BFS
+		Queue<int[]> q = new LinkedList<>();
+		int[][] dirs = {{0,1},{-1,0},{1,0},{0,-1}};
+		q.add(new int[]{sr,sc});
+		image[sr][sc] = newColor;
+		while(!q.isEmpty())
+		{
+			int[] curr = q.poll();
+			for(int[] dir: dirs)
+			{
+				int r = curr[0] + dir[0];
+				int c = curr[1] + dir[1];
+				if(r>=0 && c>=0 && r<image.length && c< image[0].length && image[r][c] == color)
+				{
+					image[r][c] = newColor;
+					q.add(new int[]{r,c});
+				}
+			}
+		}
+		return image;
+	}
+}
+
+----------
+DFS
+---
+Time: O(m*n)
+Space: O(m*n)
+
+class Solution {
+	int dirs[][] = {{0,1},{0,-1},{1,0},{-1,0}};
+	int color;
+	public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+		color = image[sr][sc];
+		if(image == null || image.length == 0 || color == newColor) return image;
+		dfs(image, sr, sc, newColor);
+		return image;
+	}
+	private void dfs(int[][] image, int sr, int sc, int newColor)
+	{
+		//base
+		if(sr<0 || sc<0 || sr>=image.length || sc>=image[0].length || image[sr][sc] != color)
+			return;
+		//logic
+		image[sr][sc] = newColor;
+
+		for(int[] dir: dirs)
+		{
+			int r = sr + dir[0];
+			int c = sc + dir[1];
+			dfs(image, r,c,newColor);
+		}
+	}
+}
