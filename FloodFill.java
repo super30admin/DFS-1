@@ -63,7 +63,47 @@ class FloodFill {
         return image;
     }
 
+    private int[][] floodFillDFSPractice(int[][] image, int sr, int sc, int newColor) {
+        if(image == null || image.length == 0 || image[0].length == 0) return image;
+        dfshelper(image, sr, sc, image[sr][sc], newColor);
+        return image;
+    }
+
+    private void dfshelper(int[][] image, int sr, int sc, int oldColor, int newColor) {
+
+        int[][] dirs = new int[][]{
+            {-1,0},
+            {0,1},
+            {0,-1},
+            {1,0},
+        };
+        image[sr][sc] = newColor;
+        for(int[] dir: dirs) {
+            int row = dir[0]+sr;
+            int column = dir[1]+sc;
+            if(row >=0 && row<image.length && column>=0 && column<image[0].length && image[row][column]!=newColor && image[row][column]!=0){
+                dfshelper(image, row, column , oldColor, newColor);
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
+        FloodFill floodFill = new FloodFill();
+        int[][] image = new int[][] {
+            {6,7,8},
+            {9,3,0},
+            {4,0,1}
+        };
+       int[][] finalImage = floodFill.floodFillDFSPractice(image, 1,1,2);
+       for(int i=0;i<finalImage.length;i++) {
+           StringBuilder builder = new StringBuilder();
+           for(int j=0;j<finalImage[0].length;j++) {
+            builder.append(finalImage[i][j]);
+            builder.append(",");
+           }
+           System.out.println(builder.toString());
+       }
 
     }
 }
