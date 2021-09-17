@@ -1,0 +1,38 @@
+class Solution {
+    public int[][] updateMatrix(int[][] mat) {
+     if(mat==null || mat.length==0)  return mat;
+        int m=mat.length;
+        int n=mat[0].length;
+        Queue<int []> q= new LinkedList<>();
+        for(int i=0;i<m;i++)
+            for(int j=0;j<n;j++){
+                if(mat[i][j]==0){
+                    q.add(new int[]{i,j});
+                }
+                else
+                    mat[i][j]=-1;
+            }
+        int dist=1;
+        int[][] dirs={{1,0},{0,1},{-1,0},{0,-1}};
+        while(!q.isEmpty()){
+            int size=q.size();
+            for(int i=0;i<size;i++){
+                int[] nr=q.poll();
+                //int[] nc=q.poll();
+                for(int[] dir:dirs){
+                    int r=nr[0]+dir[0];
+                    int c=nr[1]+dir[1];
+                    if(r<m && c<n && r>=0 && c>=0 && mat[r][c]==-1){
+                       q.add(new int[]{r,c});
+                        mat[r][c]=dist;
+                        
+                    }
+                }
+            }
+             dist++;
+        }
+        return mat;
+    }
+}
+//TC O(m*n)
+//SC O(m*n)
