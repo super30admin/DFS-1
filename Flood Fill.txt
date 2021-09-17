@@ -1,0 +1,43 @@
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        
+       if(image==null || image.length==0 || image[0].length==0) return new int[1][1];
+        if( image[sr][sc]==newColor) return image;
+        int m=image.length;
+        int n=image[0].length;
+      //  int[][] res=new int[m][];
+        int val=image[sr][sc];
+        Queue<Integer> q=new LinkedList<>();
+      /*  for(int i=0;i<m;i++)
+            for(int j=0;j<n;j++)
+            {
+                if(image[i][j]==val){
+                   
+                }
+            }*/
+         image[sr][sc]=newColor;
+         q.add(sr);
+        q.add(sc);
+        System.out.println(q);
+        int[][] dirs={{1,0},{-1,0},{0,1},{0,-1}};
+        while(!q.isEmpty()){
+            int size=q.size();
+            for(int i=0;i<size;i=i+2){
+                int r=q.poll();
+                int c=q.poll();
+                for(int[] dir:dirs){
+                    int nr=r+dir[0];
+                    int nc=c+dir[1];
+                    if(nr>=0 && nc>=0 && nr<m   && nc <n && image[nr][nc]==val ){
+                      image[nr][nc]=newColor;
+                        q.add(nr);
+                        q.add(nc);
+                    }
+                }
+            }
+        }
+        return image;
+        
+    }
+}
+
