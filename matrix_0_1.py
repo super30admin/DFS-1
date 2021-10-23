@@ -1,5 +1,5 @@
 # // Time Complexity : O(m*n) where m,n are rows and columns of the matrix respectively
-# // Space Complexity : O(1)
+# // Space Complexity : O(m*n)
 # // Did this code successfully run on Leetcode : 
 # // Any problem you faced while coding this : 
 
