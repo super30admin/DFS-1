@@ -34,4 +34,4 @@ class Solution{
        return mat; // in the end, we return the matrix.
     }
 }
-//tc and sc - O(m*n )
+//tc and sc - O(m*n)
