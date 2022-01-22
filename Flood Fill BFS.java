@@ -1,4 +1,4 @@
-// Time Complexity : O(m*n)
+// Time Complexity : O(m*n); where m = numbers of rows and n = number of columns in the input matrix
 // Space Complexity : O(m*n)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
@@ -35,7 +35,7 @@ class Solution {
                 
                 // check whether the neighbors are in bound and have the same original color
                 if(nr >= 0 && nc >= 0 && nr < m && nc < n && image[nr][nc] == color){
-                    // add the neighbors' roq and column index to the queue and change it to new color
+                    // add the neighbors' row and column index to the queue and change it to new color
                     q.add(nr);
                     q.add(nc);
                     image[nr][nc] = newColor;
