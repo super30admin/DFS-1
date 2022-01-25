@@ -1,0 +1,28 @@
+//BFS
+//TC:O(n)
+//sc:O(n)
+//passed all testcases:yes
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        if (image == null || image[sr][sc] == newColor) return image;
+            Queue<int []> q = new LinkedList<>(); //can use two queue, one for row, one for column (see video)
+            int [][]dirs = {{1,0},{-1,0},{0,1},{0,-1}};
+            int orgColor = image[sr][sc];
+            int m = image.length; int n = image[0].length;
+            q.add(new int []{sr,sc});
+            image[sr][sc] = newColor;               
+            while(!q.isEmpty()) {
+                int [] curr = q.poll();
+                for(int [] dir: dirs){ //updating for all 4 directions and adding to queue, updating it's value
+                    int nr = curr[0] +dir[0];
+                    int nc = curr[1] + dir[1];
+                    if (nr >=0 && nc >=0 && nr < m && nc <n && image[nr][nc] == orgColor){ //bound check
+                        q.add(new int[]{nr,nc});
+                        image[nr][nc] = newColor;
+                        
+                    }
+                }
+            }
+            return image;
+     }
+}
