@@ -19,6 +19,8 @@
  * we change it to new color, otherwise we skip that.
  */
 
+//The code ran perfectly on leetocde
+
 class Solution {
     vector<vector<int>> dirs  {{0,1}, {0,-1}, {-1,0},{1,0}};
 public:
