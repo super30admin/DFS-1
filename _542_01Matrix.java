@@ -1,7 +1,7 @@
 // Time Complexity : o(n*m * log(m*n)) where n is number of rows and m is number of colums
 // Space Complexity : o(n*m) where n is number of rows and m is number of colums
-// Did this code successfully run on Leetcode :
-// Any problem you faced while coding this :
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
 
 
 // Your code here along with comments explaining your approach
@@ -96,7 +96,7 @@ class Solution {
 
 // Your code here along with comments explaining your approach
 //Approach : BFS approach, add all o in the Queue and procceed with BFS traversal, if you encountered an unvisited 1 or
-//a visited 1 with lesser distance update teh diatnce and add the cell in queue
+//a visited 1 with lesser distance update the distance and add the cell in queue
 
 class Solution {
 
