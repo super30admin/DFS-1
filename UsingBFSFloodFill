@@ -39,3 +39,49 @@ class Solution {
         return image;
     }
 }
+
+/**
+Using DFS.
+
+
+TC - O(m*n)
+SC - O(1)
+**/
+class Solution {
+    
+    int dirs[][] = {{1,0}, {0,1}, {-1,0}, {0,-1}};
+    int oldColor;
+    int rows, cols;
+    
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        oldColor = image[sr][sc];
+        rows = image.length;
+        cols = image[0].length;
+        floodFillRecursion(image, sr, sc, newColor);
+        return image;
+    }
+    
+    private void floodFillRecursion(int image[][], int sr, int sc, int newColor)
+    {
+        if (sr <0 || sr>=rows || sc<0 || sc>=cols)
+        {
+            return;
+        }
+        
+        if (image[sr][sc] == newColor || image[sr][sc] != oldColor)
+        {
+            return;
+        }
+        
+        image[sr][sc] = newColor;
+        
+        // find neighbours
+        for (int dir[] : dirs)
+        {
+            int ni = sr + dir[0];
+            int nj = sc + dir[1];
+            
+            floodFillRecursion(image, ni, nj, newColor);
+        }
+    }
+}
