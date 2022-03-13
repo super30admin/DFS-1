@@ -1,0 +1,48 @@
+//BFS
+class Solution {
+    private  int[][] directions = {
+        {0,1}, //Right
+        {1,0}, //DOWN
+        {0,-1}, //LEFT
+        {-1,0} //UP
+    };
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        
+        if(image[sr][sc] == newColor){  //if already changed then return image
+            return image;
+        }
+        
+        Queue<int[]> q = new LinkedList<>();
+        
+        int sourceClr = image[sr][sc];
+        image[sr][sc] = newColor;
+        
+        q.add(new int[]{sr, sc});
+        
+        while(!q.isEmpty()){
+            
+            //here we don't need to check curr level or anything
+            int[] xy = q.remove();
+            
+            for(int[] dir : directions){
+                
+                int newRow = xy[0] + dir[0];
+                int newCol = xy[1] + dir[1];
+                
+                if(newRow >= 0 && newCol >= 0 && 
+           newRow < image.length && newCol < image[0].length && 
+           image[newRow][newCol] == sourceClr){
+                    
+                    image[newRow][newCol] = newColor;  //updating
+                    q.add(new int[]{newRow, newCol});
+        }
+                
+
+            }
+            
+        }
+        
+        return image;
+        
+    }
+}
