@@ -32,3 +32,35 @@ class Solution {
         }
     }
 }
+
+//TC: O(m*n)
+//SC: O(m*n)
+
+class Solution {
+    int color;
+    int m;
+    int n;
+    int[][] dirs;
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        if(image ==null ||image.length==0||image[sr][sc]==newColor) return image;
+        m = image.length;
+        n = image[0].length;
+        Queue<int[]> q = new LinkedList<>();
+        color = image[sr][sc];
+        dirs = new int[][]{{-1,0},{0,1},{0,-1},{1,0}}; // U R L D
+        image[sr][sc] = newColor;
+        q.add(new int[] {sr,sc});
+        while(!q.isEmpty()){
+            int[] curr = q.poll();
+            for(int[] dir:dirs){
+                int nr = dir[0]+curr[0];
+                int nc = dir[1]+curr[1];
+                if(nr>=0 && nr<m && nc>=0 && nc<n&&image[nr][nc]==color){
+                    image[nr][nc] = newColor;
+                    q.add(new int[]{nr,nc});
+                }
+            }
+        }
+        return image;
+    }
+}
