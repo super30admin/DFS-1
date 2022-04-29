@@ -3,6 +3,7 @@ public class FloodFillDFS {
     int[][] dirs;
 
 
+    // DFS approach - Put the elements in 4 directions one-by-one in a recursion stack
     // TC: O(m * n) -> m is the number rows & n is the number of columns
     // SC: O(m * n)
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
