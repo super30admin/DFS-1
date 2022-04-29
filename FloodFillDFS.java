@@ -1,4 +1,5 @@
-int m,n, color;
+public class FloodFillDFS {
+    int m,n, color;
     int[][] dirs;
 
 
@@ -9,9 +10,16 @@ int m,n, color;
 
         m = image.length;
         n = image[0].length;
-        
+
         // Direction array
-        dirs = new int[][]{{0,1},{0, -1},{1,0},{-1,0}}; // R, L, D, U
+        dirs = new int[][]{
+                {0,1},
+                {0, -1},
+                {1,0},
+                {-1,0}
+        }; // R, L, D, U
+
+        // Find out the color at the given co-ordinates. We need to replace this color wherever we find this.
         color = image[sr][sc];
 
         dfs(sr, sc, newColor, image);
@@ -34,3 +42,4 @@ int m,n, color;
             dfs(r,c,newColor,image);
         }
     }
+}
