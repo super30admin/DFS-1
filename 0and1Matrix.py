@@ -1,5 +1,5 @@
-#Time complexity: O(n)
-#Space complexity: O(n)
+#Time complexity: O(mn)
+#Space complexity: O(mn)
 from collections import deque
 
 
