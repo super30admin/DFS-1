@@ -52,6 +52,51 @@ class Solution {
         
     }
 }
+//****FLOOD FILL- DFS APPROACH*****
+//Time complexity:o(m*n);
+//Space complexity:o(m*n);
+//Leetcode runnable:Y;
+//Any doubts:N;
 
 
-// Your code here along with comments explaining your approach
+class Solution {
+    int m;
+    int n;
+    int[][] dirs;
+    int currcolor;
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) 
+    {
+        
+        m=image.length;
+        n=image[0].length;
+        //Null case
+        if(image.length==0 || image[sr][sc]==color) return image;
+        
+        //Directions array for going in 4 directions
+                             //u    //d   //L    //R
+        dirs=new int[][] {{-1,0},{1,0},{0,-1},{0,1}};
+        
+        //Getting thr current color
+        currcolor=image[sr][sc];
+        dfs(image, sr, sc, color, m, n);
+        
+        return image;
+    }
+    
+    private void dfs(int[][] image, int sr, int sc, int color, int m, int n)
+    {
+        //BASE
+        if(sr< 0 || sc<0 || sr==m || sc==n || image[sr][sc]!=currcolor) return;
+        
+        //LOGIC
+        image[sr][sc]=color;
+        //Iterating on all the directions
+        for(int [] dir: dirs)
+        {
+            int nr=sr+dir[0];
+            int nc=sc+dir[1];
+            dfs(image, nr, nc, color, m, n);
+        }
+        
+    }
+}
