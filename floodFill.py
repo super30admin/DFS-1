@@ -28,4 +28,38 @@ class Solution:
             nc = sc + d[1]
             self.dfs(image, nr, nc, color, origColor)
         
+
+"""Approach: BFS
+
+TC O(m*n)
+SC O(m*n)
+"""
+
+from collections import deque
+class Solution:
+    dirs = [[1,0],[0,1],[0,-1],[-1,0]]
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        # base case
+        if not image or len(image)  == 0:
+            return list()
+        
+        # if image color at given location is same as expected color, stop there
+        # one such case is [[0,0,0],[0,0,0]] 0 0 0
+        if image[sr][sc] == color: return image
+        # logic - use BFS
+        q = deque()
+        origColor= image[sr][sc]
+        print(origColor, color)
+        q.append((sr,sc))
+        
+        while q:
+            sr, sc = q.popleft()
+            if sr >= 0 and sc >= 0 and sr < len(image) and sc < len(image[0]) and image[sr][sc] == origColor: 
+                image[sr][sc] = color
+                for d in self.dirs:
+                    nr = sr + d[0]
+                    nc = sc + d[1]
+                    q.append((nr,nc))
+
+        return image
         
