@@ -1,12 +1,15 @@
+# Time Complexity : O(m*n)
+# Space Complexity : O(m*n)
+# Did this code successfully run on Leetcode : Yes
+# Any problem you faced while coding this : No
+#
+#
 # BFS
-# TC: O((m*n)); SC: O(m*n)
-
 from collections import deque
 
 
 class Solution:
     def updateMatrix(self, matrix: list[list[int]]) -> list[list[int]]:
-        check = []
         m = len(matrix)
         n = len(matrix[0])
         queue = deque()
