@@ -1,0 +1,37 @@
+#T(N) = O(N)
+#S(N) = O(N)
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        from collections import deque
+        q=deque()
+        m=len(mat)
+        n=len(mat[0])
+        for i in range(m):
+            for j in range(n):
+                if mat[i][j]==0:
+                    q.append((i,j))
+        co=0
+        dirs=[(0,1),(0,-1),(1,0),(-1,0)]
+        while q:
+            co+=1
+            print(co)
+            for i in range(len(q)):
+                te=q.popleft()
+                for j in dirs:
+                    a=te[0]+j[0]
+                    b=te[1]+j[1]
+                    if a>=0 and b>=0 and a<m and b<n and mat[a][b]==1:
+                        if co==1 :       
+                            mat[a][b]=-1
+                            q.append((a,b))
+                            
+                        else:
+                           
+                            mat[a][b]=co
+                            q.append((a,b))
+        for i in range(m):
+            for j in range(n):
+                if mat[i][j]==-1:
+                    mat[i][j]=1
+        return mat
+            
