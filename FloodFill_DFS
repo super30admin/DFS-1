@@ -1,0 +1,29 @@
+// Time Complexity: O(MxN), M = number of rows, n = number of columns
+// Space Complexity: O(MxN), M = number of rows, n = number of columns
+
+class Solution {
+    int[][] dirs;
+    int m, n;
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        if(image == null || image.length == 0 || color == image[sr][sc])
+            return image;
+        
+        m = image.length;
+        n = image[0].length;
+        dirs = new int[][] {{0,1}, {1,0}, {-1,0}, {0,-1}};
+        dfs(image, sr, sc, color, image[sr][sc]);
+        return image;
+    }
+    private void dfs(int[][] image, int sr, int sc, int color, int pixel) {
+        // base case
+        if(sr < 0 || sr == m || sc < 0 || sc == n || image[sr][sc] != pixel)
+            return;
+        // logic
+        image[sr][sc] = color;
+        for(int[] dir: dirs) {
+            int row = sr + dir[0];
+            int col = sc + dir[1];
+            dfs(image, row, col, color, pixel);
+        }
+    }
+}

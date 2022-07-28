@@ -1,0 +1,33 @@
+// Time Complexity: O(MxN), M = number of rows, n = number of columns
+// Space Complexity: O(MxN), M = number of rows, n = number of columns
+
+class Solution {
+    public int[][] updateMatrix(int[][] mat) {
+        if(mat == null || mat.length == 0)
+            return mat;
+        
+        int[][] dirs = new int[][] {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+        Queue<int[]> queue = new LinkedList<>();
+        for(int i = 0; i < mat.length; i++) {
+            for(int j = 0; j < mat[0].length; j++) {
+                if(mat[i][j] == 0)
+                    queue.add(new int[] {i, j});
+                else if(mat[i][j] == 1)
+                    mat[i][j] = -1;
+             }
+        }
+        
+        while(!queue.isEmpty()) {
+            int[] curr = queue.poll();
+            for(int[] dir: dirs) {
+                int row = curr[0] + dir[0];
+                int col = curr[1] + dir[1];
+                if(row >= 0 && row < mat.length && col >= 0  && col < mat[0].length && mat[row][col] == -1) {
+                    mat[row][col] = mat[curr[0]][curr[1]] + 1;
+                    queue.add(new int[] {row,col});
+                }
+            }
+        }
+        return mat;
+    }
+}
