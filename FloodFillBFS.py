@@ -9,7 +9,7 @@ class Solution(object):
         """
         '''We can do either BFS or DFS as we have connected components.'''
         #Time Complexity: O(mn)
-        #Space Complexity: O(1)
+        #Space Complexity: O(mn)
         #null case
         if len(image)==0 or image[sr][sc]==color:
             return image
