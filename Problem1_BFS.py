@@ -1,5 +1,5 @@
-# Time complexity : O(n)
-# Space complexity : O(n)
+# Time complexity : O(m*n)
+# Space complexity : O(m*n)
 # Leetcode : Solved and submitted
 
 from collections import deque
