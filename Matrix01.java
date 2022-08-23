@@ -48,5 +48,43 @@ class Solution {
 		}
 
 		return mat;
+		// Time Complexity : O(m*n)2, Space Complexity : O(m*n)2
+//	if (mat == null || mat.length == 0) return mat;
+//	        
+//	        dirs = new int[][] {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+//	        int m = mat.length, n = mat[0].length;
+//	        
+//	        for (int i = 0; i < m; i++) {
+//	            for (int j = 0; j < n; j++) {
+//	                if (mat[i][j] == 1) {
+//	                    mat[i][j] = -1;
+//	                }
+//	            }
+//	        }
+//	        
+//	        for (int i = 0; i < m; i++) {
+//	            for (int j = 0; j < n; j++) {
+//	                if (mat[i][j] == 0) {
+//	                    dfs(mat, i, j, 0);
+//	                }
+//	            }
+//	        }
+//	        
+//	        return mat;
+//	    }
+//	    
+//	    private void dfs(int[][] mat, int i, int j, int dist) {
+//	        // base
+//	        if (i < 0 || i >= mat.length || j < 0 || j >= mat[0].length) return;
+//	        
+//	        if (mat[i][j] != -1 && mat[i][j] < dist) return;
+//	        
+//	        // logic
+//	        mat[i][j] = dist;
+//	        for (int[] dir : dirs) {
+//	            int row = i + dir[0];
+//	            int column = j + dir[1];
+//	            dfs(mat, row, column, dist+1);
+//	        }
 	}
 }
