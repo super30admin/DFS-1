@@ -1,0 +1,24 @@
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        rows = len(image)
+        cols = len(image[0])
+        initialColor = image[sr][sc]
+        if initialColor == color:
+            return image
+        def dfs(r, c):
+            if (r < 0 or r >= rows or
+                c < 0 or c >= cols or
+                image[r][c] != initialColor
+            ):
+                return
+            image[r][c] = color
+            dfs(r + 1, c)
+            dfs(r - 1, c)
+            dfs(r, c + 1)
+            dfs(r, c - 1)
+        dfs(sr, sc)
+        return image
+    
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+# Successfully implemented on Leetcode
