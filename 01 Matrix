@@ -1,0 +1,29 @@
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        rows = len(mat)
+        cols = len(mat[0])
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        q = deque()
+        visited = set()
+        for r in range(rows):
+            for c in range(cols):
+                if mat[r][c] == 0:
+                    q.append((r, c, 0))
+                    visited.add((r, c))
+        res = [[0 if mat[r][c] == 0 else float('inf') for c in range(cols)] for r in range(rows)]
+        while q:
+            r, c, distance = q.popleft()
+            res[r][c] = min(res[r][c], distance)
+            for dRow, dCol in directions:
+                newRow, newCol = r + dRow, c + dCol
+                if (0 <= newRow < rows and
+                    0 <= newCol < cols and
+                    (newRow, newCol) not in visited and
+                    mat[newRow][newCol] == 1):
+                    q.append((newRow, newCol, distance + 1))
+                    visited.add((newRow, newCol))
+        return res
+    
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+# Successfully implemented on Leetcode
