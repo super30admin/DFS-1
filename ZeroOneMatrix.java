@@ -14,7 +14,6 @@ public class ZeroOneMatrix {
             }
         }
         
-        int distance = 0;
         while(!q.isEmpty()){
             int size = q.size();
             for(int i=0;i<size;i++){
@@ -25,7 +24,6 @@ public class ZeroOneMatrix {
                     
                     if(nr>=0 && nc>=0 && nr<m && nc<n && matrix[nr][nc]==-1){
                         matrix[nr][nc] = matrix[curr[0]][curr[1]]+1;
-                        distance++;
                         q.add(new int[]{nr,nc});
                     }
                 }
