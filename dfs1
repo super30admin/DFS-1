@@ -1,0 +1,42 @@
+Flood Fill
+#tc:O(mn)
+#sc:O(mn)
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        deltas = [(1,0), (-1, 0), (0, 1), (0, -1)]
+        starting_color = image[sr][sc]
+                
+        def dfs(r, c):
+            row_boundary = 0 <= r < len(image)
+            col_boundary = 0 <= c < len(image[0])
+            if not row_boundary or not col_boundary or image[r][c] == color or image[r][c] != starting_color:
+                return 
+            image[r][c] = color
+            for delta_row, delta_col in deltas:
+                dfs(r + delta_row, c + delta_col)
+        
+        dfs(sr, sc)
+        return image
+
+
+01 Matrix
+#tc:O(mn)
+#sc: O(m+n)
+    
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        r=len(mat)
+        c=len(mat[0])
+        for i in range(r):
+            for j in range(c):
+                if mat[i][j]!=0:
+                    top=mat[i-1][j] if i>0 else float('inf')
+                    left=mat[i][j-1] if j>0 else float('inf')
+                    mat[i][j]=min(top,left)+1
+        for i in range(r-1,-1,-1):
+            for j in range(c-1,-1,-1):
+                if mat[i][j]!=0:
+                    down=mat[i+1][j] if i<r-1 else float('inf')
+                    right=mat[i][j+1] if j<c-1 else float('inf')
+                    mat[i][j]=min(mat[i][j],min(down,right)+1)
+        return mat
