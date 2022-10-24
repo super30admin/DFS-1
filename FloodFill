@@ -1,0 +1,79 @@
+class Solution {
+public:
+       int dir[4][4] = {{-1,0},{0,-1},{1,0},{0,1}};
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        if(color == image[sr][sc]){
+            return image;
+        }
+        int n = image.size();
+        int m = image[0].size();
+        queue<pair<int,int>> q;
+        q.push({sr,sc});
+        int oldcolor= image[sr][sc];
+        image[sr][sc] = color;
+        
+        while(!q.empty()){
+            int size = q.size();
+            for(int i =0 ; i< size; i++){
+                int r = q.front().first;
+                int c = q.front().second;
+                q.pop();
+                for(auto i : dir){
+                    int nr = r + i[0];
+                    int nc = c + i[1];
+                    if(nr>=0 && nr<n && nc>=0 && nc<m && image[nr][nc] == oldcolor){
+                        q.push({nr,nc});
+                        image[nr][nc]= color;
+                    }
+                }
+            }
+        }
+       
+  return image;      
+    }
+        
+//         if(image.size() == 0 || image[sr][sc] == color ){
+//             return image;
+//         }
+//         // if color is at starting point so no point of going ahead, it should have colored its neighbours
+        
+//         int oldcolor = image[sr][sc];
+//         // to check for old one
+        
+        
+//         // DFS initialisation 
+//         dfs(image,sr,sc,color, oldcolor);
+//         return image;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//      void dfs(vector<vector<int>> &image, int sr, int sc, int color, int oldcolor ){
+      
+//         if(image[sr][sc]!=oldcolor || image.size()==0 ){
+//             return;
+//         }
+//          int row = sr;
+//          int col = sc;
+     
+//         for(auto i : dir){
+//                 int nr = row + i[0];
+//                 int nc = col + i[1];
+                
+//                 if(nr>=0 && nr<image.size() && nc>=0 && nc<image[0].size() && image[nr][nc]==oldcolor){
+//                     dfs(image,nr,nc,color,oldcolor);
+                    
+//                 }
+//             image[row][col] = color;
+//             }
+         
+//         }
+};
+            
+    
