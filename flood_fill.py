@@ -2,7 +2,7 @@
 # O(M*N)
 
 # Space Complexity :
-# O(1)
+# O(M*N)
 
 # Did this code successfully run on Leetcode :
 #Yes
