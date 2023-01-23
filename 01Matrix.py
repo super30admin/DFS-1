@@ -4,10 +4,6 @@
 # Any problem you faced while coding this : No
 
 
-
-
-
-
 def updateMatrix(self, mat):
         """
         :type mat: List[List[int]]
