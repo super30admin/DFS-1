@@ -25,9 +25,9 @@ class Solution {
             int size = bfsQueue.size();
             for (int i = 0; i < size; i++) {
                 int[] curr = bfsQueue.poll();
-                for (int[] dir : directions) {
-                    int dirRow = curr[0] + dir[0];
-                    int dirCol = curr[1] + dir[1];
+                for (int[] direction : directions) {
+                    int dirRow = curr[0] + direction[0];
+                    int dirCol = curr[1] + direction[1];
                     if (dirRow >= 0 && dirCol >= 0 && dirRow < m && dirCol < n && mat[dirRow][dirCol] == -1) {
                         mat[dirRow][dirCol] = mat[curr[0]][curr[1]] + 1;
                         bfsQueue.add(new int[]{dirRow, dirCol});

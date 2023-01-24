@@ -24,9 +24,9 @@ class FloodFillBFS {
         while (!bfsQueue.isEmpty()) {
             int cr = bfsQueue.poll();
             int cc = bfsQueue.poll();
-            for (int[] dir : directions) {
-                int nr = dir[0] + cr;
-                int nc = dir[1] + cc;
+            for (int[] direction : directions) {
+                int nr = direction[0] + cr;
+                int nc = direction[1] + cc;
                 if (nr >= 0 && nc >= 0 && nr < m && nc < n && image[nr][nc] == oldColor) {
                     image[nr][nc] = color;
                     bfsQueue.add(nr);
@@ -44,7 +44,7 @@ class FloodFillBFS {
 // Any problem you faced while coding this : No
 
 class FloodFillDFS {
-    int[][] dirs;
+    int[][] directions;
     int m, n;
 
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
@@ -61,15 +61,15 @@ class FloodFillDFS {
         return image;
     }
 
-    private void dfs(int[][] image, int sr, int sc, int newColor, int oldColor, int[][] dirs, int m, int n) {
-        if (sr < 0 || sc < 0 || sr == m || sc == n || image[sr][sc] != oldColor) {
+    private void dfs(int[][] image, int sourceRow, int sourceCol, int newColor, int oldColor, int[][] directions, int m, int n) {
+        if (sourceRow < 0 || sourceCol < 0 || sourceRow == m || sourceCol == n || image[sourceRow][sourceCol] != oldColor) {
             return;
         }
-        image[sr][sc] = newColor;
-        for (int[] dir : dirs) {
-            int nr = dir[0] + sr;
-            int nc = dir[1] + sc;
-            dfs(image, nr, nc, newColor, oldColor, dirs, m, n);
+        image[sourceRow][sourceCol] = newColor;
+        for (int[] direction : directions) {
+            int dirRow = direction[0] + sourceRow;
+            int dirCol = direction[1] + sourceCol;
+            dfs(image, dirRow, dirCol, newColor, oldColor, directions, m, n);
         }
     }
 
