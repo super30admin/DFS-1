@@ -7,10 +7,10 @@ import java.util.Queue;
 //Any problem you faced while coding this : No
 
 /**
- * Apply BFS. Store all indices where 0 is present. From there we have to 
+ * Apply BFS. Store all indices where 0 is present. From there we have to
  * calculate the distance to 1s in the matrix. while storing in queue, add a 0
- * which is the distance to the current index. Increment it after every pop and push
- * it along with the adjacent nodes.
+ * which is the distance to the current index. Increment it after every pop and
+ * push it along with the adjacent nodes.
  *
  */
 class Solution {
@@ -53,3 +53,4 @@ class Solution {
 		}
 	}
 }
+
