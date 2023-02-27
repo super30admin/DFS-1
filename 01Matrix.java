@@ -1,3 +1,7 @@
+//time complexity : O(m*n)
+//space complexity : O(m*n)
+
+
 class Solution {
     public int[][] updateMatrix(int[][] mat) {
        if(mat==null) return new int[][]{};
