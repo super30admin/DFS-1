@@ -1,3 +1,6 @@
+//time complexity : O(m*n)
+//space complexity : O(m*n)
+
 class Solution {
     int[][] dirs;
     int cc;
