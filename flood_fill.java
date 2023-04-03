@@ -19,8 +19,8 @@ class Solution {
         }
     }
 
-    // Time Complexity : O(N)
-    // Space Complexity : O(N)
+    // Time Complexity : O(mn)
+    // Space Complexity : O(mn)
     // Did this code successfully run on Leetcode : Yes
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         if(image == null || image.length == 0) {
