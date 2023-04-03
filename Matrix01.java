@@ -23,7 +23,7 @@ public class Matrix01 {
         int dist = 1;
         while(!q.isEmpty()) {
             int size = q.size();
-            for(int i = 0; i<size; i++) {
+            for(int i = 0; i<size; i++) { // size to check levels
                 int[] curr = q.poll();
                 for(int[] dir : dirs) {
                     int nr =  curr[0] + dir[0];
