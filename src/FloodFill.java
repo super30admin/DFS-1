@@ -11,6 +11,8 @@ class Solution {
       public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         
 // ******************** BFS Approach ******************** 
+// Time Complexity:  O(mn)
+// Space Complexity: O(mn)
   
         if(image[sr][sc] == color)                                               // if same color then return as it is
             return image;
@@ -41,6 +43,8 @@ class Solution {
         return image;
   
 // // ******************** DFS Approach ******************** 
+// Time Complexity:  O(mn)
+// Space Complexity: O(mn)
         
 //         if(image[sr][sc] == color)                                               // if same color then return as it is
 //             return image;
