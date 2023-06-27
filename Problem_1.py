@@ -1,11 +1,24 @@
 """
 Problem : 1
 
-Time Complexity : O()
-Space Complexity : O()
+Time Complexity : O(m*n)
+Space Complexity : O(m*n)
 
 Did this code successfully run on Leetcode : Yes
 Any problem you faced while coding this : No
+
+For BFS - 
+Appending the input row and column number to queue to initiate flooding
+checking the neighbors are inbounds and their color matches the color of
+source, then changing their color and appending them to the queue and repeating until all cells are visited and queue becomes empty
+
+
+For DFS - 
+Calling the dfs recursive function on the source row and column number given
+checking the neighbors are inbounds and their color matches the color of
+source, then changing the color and recusrsively calling dfs function on all the neighbors
+terminating only when encountered neighbors out of bounds or encountered cell with color not matching 
+with the color of the source cell
 
 
 
