@@ -1,0 +1,58 @@
+//733. Flood Fill
+
+
+//TC= O(m*n) SC=O(m*n) bfs
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+    if(image==null || image.length==0)return image;
+    int orig=image[sr][sc];
+    if(orig==color)return image;
+    int [][]dirs=new int[][]{{0,1},{0,-1},{-1,0},{1,0}};
+    Queue<Integer>q=new LinkedList<>();
+    q.add(sr);q.add(sc);
+    image[sr][sc]=color;
+    while(!q.isEmpty()){
+       int cr=q.poll();
+        int cc=q.poll();
+        for(int []dir:dirs){
+            int nr=cr+dir[0];
+            int nc=cc+dir[1];
+    if(nr>=0 && nc>=0 && nr<image.length && nc<image[0].length && image[nr][nc]==orig){
+        q.add(nr);q.add(nc);
+        image[nr][nc]=color;
+
+            }
+        }
+    }
+      return image;
+    }
+  
+}
+
+
+
+// //TC= O(m*n) SC=O(m*n) dfs
+// class Solution {
+//     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+//     if(image==null || image.length==0)return image;
+//     int orig=image[sr][sc];
+//     if(orig==color)return image;
+//     int [][]dirs=new int[][]{{0,1},{0,-1},{-1,0},{1,0}};
+//     dfs(image,sr,sc,orig,color,dirs);
+//     return image;
+//     }
+//         private void dfs(int[][] image, int r, int c,int orig, int color,int [][]dirs){
+//         //base
+//     if(r<0 || c<0 || r==image.length || c==image[0].length || 
+//     image[r][c]!=orig)return;
+//         //logic
+//         image[r][c]=color;
+//         for(int[]dir:dirs){
+//             int nr=r+dir[0];
+//             int nc=c+dir[1];
+//              dfs(image,nr,nc,orig,color,dirs);
+//         }
+
+//     }
+
+// }
