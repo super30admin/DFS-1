@@ -1,0 +1,40 @@
+/** Time Complexity - O(N)
+Space Complexity - O(N)
+ */
+class Solution {
+    
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        int[][] directions = new int[][]{{0,1}, {1, 0}, {-1,0}, {0,-1}};
+        if (image[sr][sc] == color) {
+            return image;
+        }
+
+        int m = image.length;
+        int n = image[0].length;
+
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{sr, sc});
+
+        int origColor = image[sr][sc];
+
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i=0; i< size; i++) {
+                int[] coord =  q.poll();
+                int x = coord[0];
+                int y = coord[1];
+                if (image[x][y] == origColor) {
+                    for (int[] dir : directions) {
+                        int nr = x + dir[0];
+                        int nc = y + dir[1];
+                        if (nr >=0 && nc >=0 && nr <m && nc <n && image[nr][nc] == origColor) {
+                            q.add(new int[]{nr, nc});
+                        }
+                    }
+                }
+                image[x][y] = color;
+            }
+        }
+        return image;
+    }
+}
