@@ -1,0 +1,34 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red25\green25\blue25;}
+{\*\expandedcolortbl;;\cssrgb\c12941\c12941\c12941;}
+\margl1440\margr1440\vieww9680\viewh6580\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+class Solution:\
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:\
+        \
+        if image[sr][sc] == color:\
+            return image\
+        m = len(image)\
+        n = len(image[0])\
+        initialcolor = image[sr][sc]\
+        \
+        def helper(image, i, j, color, initialcolor):\
+            #base case\
+            if image[i][j] == color or image[i][j] != initialcolor:\
+                return\
+            if image[i][j] == initialcolor:\
+                image[i][j] = color\
+                \
+            #logic\
+            direction = [[1,0], [-1,0], [0,1], [0, -1]]\
+            for r, c in direction:\
+                nr = i + r\
+                nc = j + c\
+                if nr >= 0 and nr < len(image) and nc >= 0 and nc < len(image[0]):\
+                    helper(image, nr, nc, color, initialcolor)\
+        helper(image, sr, sc, color, initialcolor)\
+        return image}
