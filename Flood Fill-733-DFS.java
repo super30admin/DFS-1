@@ -1,6 +1,6 @@
 class Solution {
     // Time Complexity: O(m*n)
-    //Space Complexity: O(m+n) 
+    //Space Complexity: O(m*n) 
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         if(image==null || image.length==0 || image[sr][sc]==color)
         {
