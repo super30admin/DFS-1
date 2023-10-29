@@ -1,5 +1,6 @@
 //BFS Solution - Time: O(mxn) and space - maximum size of queue - O(mxn){worst case scenario}
 // if we would have selected 1's instead of 0's we would have to go to each 1 and perform bfs which would result in a time of O(mxn) x O(mxn);
+// We could have done it with DFS also with same complexities but dfs was a bit difficult to understand, but I'll consider doing it later. Refer to JS's solution for DFS(mind blowing solution).
 class Solution {
 public:
     vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) {
