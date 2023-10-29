@@ -1,6 +1,6 @@
 
-// Time Complexity :O(n)
-// Space Complexity : O(n) 
+// Time Complexity :O(m*n)
+// Space Complexity : O(m*n) 
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 
