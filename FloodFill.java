@@ -1,5 +1,5 @@
 //T.C O(m*n)
-//S.C O(1)
+//S.C O(D) where D is the length of the diagonal of the matrix 
 //DFS
 class FloodFill {
     int dirs[][] = new int[][]{{-1,0},{0,-1},{1,0},{0,1}};
