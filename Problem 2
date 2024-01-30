@@ -1,0 +1,44 @@
+# 01 Matrix
+
+#TC: O(m*n)
+#SC: O(m*n)
+Approach: BFS
+
+from typing import List
+from collections import deque
+
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        if not mat:
+            return mat
+        
+        m, n = len(mat), len(mat[0])
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        
+        queue = deque()
+        
+        # Enqueue all cells with value 0 and mark others as -1
+        for i in range(m):
+            for j in range(n):
+                if mat[i][j] == 0:
+                    queue.append((i, j))
+                else:
+                    mat[i][j] = -1
+        
+        # Perform BFS
+        while queue:
+            x, y = queue.popleft()
+            for dx, dy in directions:
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < m and 0 <= ny < n and mat[nx][ny] == -1:
+                    mat[nx][ny] = mat[x][y] + 1
+                    queue.append((nx, ny))
+        
+        return mat
+
+# Example usage:
+solution = Solution()
+mat1 = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
+mat2 = [[0, 0, 0], [0, 1, 0], [1, 1, 1]]
+print(solution.updateMatrix(mat1))  # Output: [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
+print(solution.updateMatrix(mat2))  # Output: [[0, 0, 0], [0, 1, 0], [1, 2, 1]]
