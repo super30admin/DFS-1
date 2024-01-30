@@ -1,0 +1,23 @@
+from queue import Queue
+# BFS=TC-O(M*n) and sc-O(M*N)
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        if len(image)==0 or image is None or image[sr][sc]==color:
+            return image
+        m=len(image)
+        n=len(image[0])
+        q=Queue()
+        s=[[-1,0],[1,0],[0,-1],[0,1]] # U D L R
+        oldcolor=image[sr][sc]
+        image[sr][sc]=color
+        print(oldcolor,image[sr][sc],color)
+        q.put([sr,sc])
+        while not q.empty():
+            curr=q.get()
+            for i in s:
+                nr=i[0]+curr[0]
+                nc=i[1]+curr[1]
+                if nr>=0 and nr<m and nc>=0 and nc<n and image[nr][nc]==oldcolor:
+                    q.put([nr,nc])
+                    image[nr][nc]=color
+        return image

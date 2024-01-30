@@ -1,0 +1,33 @@
+from queue import Queue
+#BFS -TC=O(MN) & SC=O(MN)
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        if len(mat)==0 or mat is None:
+            return mat
+        m=len(mat)
+        n=len(mat[0])
+        q=Queue()
+        dirs=[[-1,0],[1,0],[0,-1],[0,1]] # U D L R
+        for i in range(m):
+            for j in range(n):
+                if mat[i][j]==0:
+                    q.put([i,j])
+                else:
+                    mat[i][j]=-1
+        lvl=0
+        while not q.empty():
+            size=q.qsize()
+            for i in range(size):
+                curr=q.get()
+                for direction in dirs:
+                    nr=direction[0]+curr[0]
+                    nc=direction[1]+curr[1]
+                    if nr>=0 and nr<m and nc>=0 and nc<n and mat[nr][nc]==-1:
+                        mat[nr][nc]=lvl+1
+                        q.put([nr,nc])
+            lvl=lvl+1
+        return mat
+
+
+
+        
