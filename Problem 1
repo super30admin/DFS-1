@@ -1,0 +1,28 @@
+# Flood Fill
+
+#TC: O(m*n)
+#SC: O(m*n)
+Approach : DFS
+
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        # Define the directions (4-directional)
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+
+        def dfs(image, r, c, color, newColor):
+            # Base case: If the pixel is out of bounds or not the same color, return
+            if r < 0 or r >= len(image) or c < 0 or c >= len(image[0]) or image[r][c] != color:
+                return
+
+            # Change the color of the current pixel
+            image[r][c] = newColor
+
+            # Explore in all four directions
+            for dr, dc in directions:
+                dfs(image, r + dr, c + dc, color, newColor)
+
+        # Check if the new color is the same as the original color
+        if color != image[sr][sc]:
+            dfs(image, sr, sc, image[sr][sc], color)
+
+        return image
