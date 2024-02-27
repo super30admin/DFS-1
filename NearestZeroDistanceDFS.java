@@ -43,7 +43,7 @@ public class NearestZeroDistanceDFS {
                 }
             }
 
-            return min;
+            return min + 1;
         }
     }
 }
