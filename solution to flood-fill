@@ -1,0 +1,32 @@
+// Time Complexity : worst case is O(m*n)
+// Space Complexity : O(m*n)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+// update the colors recursively while checking the boundary conditions and the and the problem conditions
+
+class Solution {
+    int m, n;
+    int[][] dirs;
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        if(image == null || image.length == 0 || image[sr][sc] == color) {
+            return image;
+        }
+        m = image.length;
+        n = image[0].length;
+        dirs = new int[][] {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // Up, Down, Left, Right
+        dfs(image, sr, sc, color, image[sr][sc]);
+        return image;
+    }
+    public void dfs(int[][] image, int row, int col, int color, int initialColor) {
+        if(row < 0 || row == m || col < 0 || col == n || image[row][col] != initialColor) {
+            return;
+        }
+        image[row][col] = color;
+        for(int[] dir : dirs) {
+            int nr = row + dir[0];
+            int nc = col + dir[1];
+            dfs(image, nr, nc, color, initialColor);
+        }
+    }
+}
