@@ -1,0 +1,57 @@
+#Problem 1
+
+from queue import *
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        if image == None or len(image) == 0 or image[sr][sc] == color:
+            return image
+        m = len(image)
+        n = len(image[0])
+        oldColor = image[sr][sc]
+        dirs = [[-1,0], [1,0], [0,-1], [0,1]]
+        q = Queue()
+        q.put([sr,sc])
+        image[sr][sc] = color
+        while q.qsize() > 0:
+            cur = q.get()
+            for dir in dirs:
+                nr = cur[0] + dir[0]
+                nc = cur[1] + dir[1]
+                if nr >= 0 and nr < m and nc >= 0 and nc < n and image[nr][nc] == oldColor:
+                    q.put([nr,nc])
+                    image[nr][nc] = color
+        return image
+
+
+
+#Problem 2
+
+from queue import *
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        if mat == None or len(mat) == 0:
+            return []
+        m = len(mat)
+        n = len(mat[0])
+        q = Queue()
+        dirs = [[-1,0],[1,0],[0,-1], [0,1]]
+        for i in range(m):
+            for j in range(n):
+                if mat[i][j] == 0:
+                    q.put([i,j])
+                else:
+                    mat[i][j] = -1
+        lvl = 0
+        while not q.empty():
+            size = q.qsize()
+            for i in range(size):
+                cur = q.get()
+                for dir in dirs:
+                    nr = cur[0] + dir[0]
+                    nc = cur[1] + dir[1]
+                    if nr >= 0 and nr < m and nc >= 0 and nc < n and mat[nr][nc] == -1:
+                        q.put([nr,nc])
+                        mat[nr][nc] = lvl + 1
+
+            lvl += 1
+        return mat
