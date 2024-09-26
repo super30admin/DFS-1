@@ -1,0 +1,45 @@
+// Time Complexity : O(n*m)
+// Space Complexity :O(n*m)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+class Solution {
+    public int[][] updateMatrix(int[][] matrix) {
+        /* edge case */
+        if( matrix == null || matrix.length == 0) 
+            return matrix;
+        
+        /* no of rows and cols */
+        int m = matrix.length; 
+        int n = matrix[0].length;
+        
+        Queue<int[]> queue = new LinkedList<>(); // add all zero value indexs to queue
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    queue.offer(new int[] {i, j});
+                }
+                else {
+                    matrix[i][j] = -1; //change all the other values to -1 for futher duplication issues
+                }
+            }
+        }
+        
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // four direction array
+        
+        while (!queue.isEmpty()) {
+            int[] cell = queue.poll(); // full out index from queue
+            for (int[] d : dirs) {
+                int r = cell[0] + d[0];
+                int c = cell[1] + d[1];
+                /* if value less than index + 1 then continue else add the index to queue and increase the value by 1*/
+                if (r < 0 || r >= m || c < 0 || c >= n || 
+                    matrix[r][c] <= matrix[cell[0]][cell[1]] + 1) continue;
+                queue.add(new int[] {r, c});
+                matrix[r][c] = matrix[cell[0]][cell[1]] + 1;
+            }
+        }
+        
+        return matrix;
+    }
+}
