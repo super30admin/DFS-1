@@ -1,0 +1,28 @@
+class Solution {
+    
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        if(image==null || image.length==0) return image;
+        int m = image[0].length;
+        int n = image.length;
+        int[][] dirs={{1,0},{-1,0},{0,1},{0,-1}};
+        if(image[sr][sc]==color) return image;
+
+        dfs(image,sr,sc,color,image[sr][sc], dirs,m,n);
+
+        return image;
+    }
+    private void dfs(int[][] image, int i, int j, int color, int org, int[][]dirs, int m, int n){
+        if(i<0 || j<0 || i>=n || j>=m) return;
+        if(image[i][j]==org){
+            image[i][j]=color;
+        }
+        for(int[] dir:dirs){
+            int nr= i+dir[0];
+            int nc= j+dir[1];
+            if(nr>=0 && nr<n && nc>=0 && nc<m && image[nr][nc]==org){
+                dfs(image,nr,nc,color,org,dirs,m,n);
+            }
+        }
+
+    }
+}
