@@ -1,0 +1,25 @@
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        if image[sr][sc] == color:
+            return image
+
+        originalColor = image[sr][sc]
+        q = []
+        q.append((sr, sc))
+
+        rows = len(image)
+        cols = len(image[0])
+
+        directions = [[-1, 0],[1,0],[0,1],[0,-1]]
+        while q:
+            r, c = q.pop(0)
+            image[r][c] = color
+
+            for dr, dc in directions:
+                new_r = dr + r
+                new_c = dc + c
+
+                if new_r < 0 or new_r >= rows or new_c < 0 or new_c >= cols or image[new_r][new_c] != originalColor:
+                    continue
+                q.append((new_r, new_c))
+        return image
