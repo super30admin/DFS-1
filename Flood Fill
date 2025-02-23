@@ -1,0 +1,55 @@
+# from queue import Queue
+# class Solution:
+#     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+#         if image == None or len(image) ==0  or image[sr][sc] == color:
+#             return image
+#         m = len(image)
+#         n = len(image[0])
+#         oldColor =image[sr][sc]
+#         dirs = [[-1,0],[1,0],[0,-1],[0,1]]
+#         rows = Queue()
+#         cols = Queue()
+#         rows.put(sr)
+#         cols.put(sc)
+#         image[sr][sc] = color
+#         while not rows.empty():
+#             cr = rows.get()
+#             cc = cols.get()
+#             for Dir in dirs:
+#                 nr = cr + Dir[0]
+#                 nc = cc + Dir[1]
+#                 if nr>=0 and nc>=0 and nr<m and nc<n and image[nr][nc] == oldColor:
+#                     rows.put(nr)
+#                     cols.put(nc)
+#                     image[nr][nc] = color
+#         return image
+
+
+#DFS
+
+from typing import List
+
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        if image is None or len(image) == 0 or image[sr][sc] == color:
+            return image
+        
+        self.m = len(image)
+        self.n = len(image[0])
+        self.oldColor = image[sr][sc]
+        self.dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]]  # Directions: Up, Down, Left, Right
+        
+        self.dfs(sr, sc, image, color)
+        return image
+
+    def dfs(self, row: int, col: int, image: List[List[int]], color: int) -> None:
+        # Base case: If out of bounds or already filled with new color, return
+        if row < 0 or row >= self.m or col < 0 or col >= self.n or image[row][col] != self.oldColor:
+            return
+        
+        # Fill the current cell with the new color
+        image[row][col] = color
+
+        # Recur in all 4 directions
+        for dr, dc in self.dirs:
+            self.dfs(row + dr, col + dc, image, color)
