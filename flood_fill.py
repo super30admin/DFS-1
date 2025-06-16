@@ -21,8 +21,8 @@ class BFSSolution:
         queue = deque()
         queue.append((sr, sc))
         # as soon as we add to the queue, we will update to the desired color to avoid duplicacy
-        if image[r][c] == originalColor:
-            image[r][c] = color
+        if image[sr][sc] == originalColor:
+            image[sr][sc] = color
 
         while queue:
             # take out what is added in the queue
@@ -40,8 +40,8 @@ class BFSSolution:
                 if 0 <= nr < rows and 0 <= nc < columns and image[nr][nc] == originalColor:
                     queue.append((nr, nc))
                     # as soon as we add to the queue, we will update to the desired color to avoid duplicacy
-                    if image[r][c] == originalColor:
-                        image[r][c] = color
+                    if image[nr][nc] == originalColor:
+                        image[nr][nc] = color
 
         return image
 
@@ -78,4 +78,4 @@ class DFSSolution:
         for dr, dc in dirs:
             nr = sr + dr
             nc = sc + dc
-            self.dfs(image, nr, nc, color, dirs, originalColor)
+            self.dfs(image, nr, nc, color, originalColor)
