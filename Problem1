@@ -1,0 +1,30 @@
+class Solution {
+    int[][] dirs;
+    int m, n;
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        if(image == null || image.length == 0 || image[sr][sc] == color){
+            return image;
+        }
+        //usind dfs approach, and checking 4 sides of each cell
+        dirs = new int[][]{{0,-1}, {0,1}, {-1,0}, {1,0}};      //L R U D
+        m = image.length;
+        n = image[0].length;
+        int prev = image[sr][sc];    // prev color
+        dfs(image, sr, sc, color, prev);
+        return image;
+    }
+
+    private void dfs(int[][] image, int sr, int sc, int color, int prev){
+        //base
+        if(sr >= m || sc >= n || sr < 0 || sc < 0 || image[sr][sc] != prev){
+            return;
+        }
+        //logic
+        image[sr][sc] = color;
+        for(int[] dir : dirs){
+            int nr = sr + dir[0];
+            int nc = sc + dir[1];
+            dfs(image, nr, nc, color, prev);
+        }
+    }
+}

@@ -1,0 +1,40 @@
+class Solution {
+    public int[][] updateMatrix(int[][] mat) {
+        if(mat == null || mat.length == 0 || mat[0].length == 0){
+            return mat;
+        }
+        //using bfs, storing 0's in queue, and adding 1's for each with distance same as level
+        Queue<int[]> q = new LinkedList<>();
+        int[][] dirs = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};  // L R U D
+        int m = mat.length;
+        int n = mat[0].length;
+        for(int i =0; i< m; i++){
+            for(int j=0; j< n; j++){
+                if(mat[i][j] == 0){
+                    q.add(new int[]{i,j});
+                }
+                else{
+                    mat[i][j] = -1;         //not visited
+                }
+            }
+        }
+        int lvl = 1;
+        while(!q.isEmpty()){
+            int size = q.size();
+            for(int i =0; i< size; i++){
+                int[] cell = q.poll();
+                for(int[] dir : dirs){
+                    int nr = cell[0]+dir[0];
+                    int nc = cell[1]+dir[1];
+                    //check boundaries and is not visited
+                    if(nr < m && nc < n && nr >= 0 && nc >= 0 && mat[nr][nc] == -1){
+                        mat[nr][nc] = lvl;
+                        q.add(new int[]{nr, nc});
+                    }
+                }
+            }
+            lvl++;
+        }
+        return mat;
+    }
+}
