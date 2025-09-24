@@ -1,0 +1,31 @@
+// Time Complexity : O(m*n)
+// Space Complexity : O(m*n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : None
+
+// Starting from the source do dfs to all neighbours
+// Change color of the new position  
+
+// Your code here along with comments explaining your approach
+
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        if(image[sr][sc] == color)
+            return image;
+        int orgColor = image[sr][sc];
+        dfs(image, sr, sc, color, orgColor);
+        return image;
+    }
+
+    private void dfs(int[][] image, int r, int c, int color, int orgColor) {
+        if(r < 0 || r >= image.length || c < 0 || c >= image[0].length || image[r][c] != orgColor)
+            return;
+
+        image[r][c] = color;
+        // check all neighbours0
+        dfs(image, r+1, c, color, orgColor);
+        dfs(image, r, c+1, color, orgColor);
+        dfs(image, r-1, c, color, orgColor);
+        dfs(image, r, c-1, color, orgColor);
+    }
+}

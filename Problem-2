@@ -1,0 +1,40 @@
+// Time Complexity : O(m*n)
+// Space Complexity : O(m*n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : None
+
+// Change all 1s to -1 and do BFS from every 0
+// update value of -1 wit distance starting from 1
+// keep track of distance for every level and increment after each level
+
+class Solution {
+    public int[][] updateMatrix(int[][] mat) {
+        Queue<int[]> q = new LinkedList<>();
+        for(int i = 0; i < mat.length; i++) {
+            for(int j = 0; j < mat[0].length; j++) {
+                if(mat[i][j] == 0)
+                    q.add(new int[]{i,j});
+                else
+                    mat[i][j] = -1;
+            }
+        }
+        int[][] dir = {{0,1}, {1,0}, {-1,0}, {0,-1}};
+        int distance = 1;
+        while(!q.isEmpty()) {
+            int size = q.size();
+            for(int i = 0; i < size; i++) {
+                int[] pos = q.poll();
+                for(int[] d : dir) {
+                    int r = d[0] + pos[0];
+                    int c = d[1] + pos[1];
+                    if(r >= 0 && r < mat.length && c >= 0 && c < mat[0].length && mat[r][c] == -1) {
+                        q.add(new int[]{r,c});
+                        mat[r][c] = distance;
+                    }
+                }
+            }
+            distance++;
+        }
+        return mat;
+    }
+}
