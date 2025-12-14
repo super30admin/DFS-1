@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/flood-fill/
 
-# Time Complexity- O(m * n) Space Complexity- O(n)
+# Time Complexity- O(m * n) Space Complexity- O(m * n)
 from collections import deque
 class Solution:
     def floodFill(self, image: list[list[int]], sr: int, sc: int, color: int) -> list[list[int]]:
@@ -23,15 +23,10 @@ class Solution:
         while q:
             # pop the left element
             curr = q.popleft()
-            # iterate over the directions to find the neighbor pixels of the current (here we have corodinate so we need to find the neighbor for both that is r and c)
+            # iterate over the directions to find the neighbor pixels of the current
             for dir in self.directions:
-                # calculates the row and column of each neighboring pixel by adding direction offsets to the current pixel’s position
-                # curr = [10, 20] then curr[0] = 10 and curr[1] = 20
-                # iterates through the directions so all 4 directions are covered
                 r = dir[0] + curr[0]
                 c = dir[1] + curr[1]
-                # below conditition checks Is this neighboring pixel valid and should we visit it. If the answer is YES, add in to the queue
-
                 # check the edge cases and condition when the neighbor pixel same as starting pixel
                 if r >= 0 and c >= 0 and r < self.m and c < self.n and      image[r][c] == oldcolor:
                     # update with the given color
